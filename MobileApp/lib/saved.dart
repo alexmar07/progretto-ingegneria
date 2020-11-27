@@ -18,12 +18,10 @@ class _SavedState extends State<Saved> {
       ),
       body: ListView(
         children: <Widget>[
-          itemCard('Hatke Hotel','assets/images/exploreOyoHotels1.jpeg',false),
-          itemCard('Hatke Hotel','assets/images/exploreOyoHotels1.jpeg',false),
-          itemCard('Hatke Hotel','assets/images/exploreOyoHotels1.jpeg',false),
-          itemCard('Hatke Hotel','assets/images/exploreOyoHotels1.jpeg',false),
-          itemCard('Hatke Hotel','assets/images/exploreOyoHotels1.jpeg',false),
-          
+          itemCard('FILM','assets/images/joker.jpg',false),
+          itemCard('FILM','assets/images/gladiatore.jpg',false),
+          itemCard('FILM','assets/images/miglio.jpg',false),
+          itemCard('FILM','assets/images/shutter.jpg',false),
         ],
       ),
     );
@@ -79,7 +77,18 @@ Widget itemCard(String title, String imgPath, bool isFavorite) {
                   Container(
                     width: 175.0,
                     child: Text(
-                      'Ratu Road, Ranchi',
+                      'Genere',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          color: Colors.grey,
+                          fontSize: 12.0),
+                    ),
+                  ),
+                  Container(
+                    width: 175.0,
+                    child: Text(
+                      'Anno di uscita',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           fontFamily: 'Quicksand',
@@ -89,35 +98,24 @@ Widget itemCard(String title, String imgPath, bool isFavorite) {
                   ),
                 ],
               ),
-              Row(
-                children: <Widget>[
-                  Icon(Icons.star,color: Colors.orange[100],size: 15,),
-                  Icon(Icons.star,color: Colors.orange[100],size: 15,),
-                  Icon(Icons.star,color: Colors.orange[100],size: 15,),
-                  Icon(Icons.star,color: Colors.orange[100],size: 15,),
-                  Icon(Icons.star,color: Colors.orange[100],size: 15,),
 
-
-                ],
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+
                   Container(
-                    height: 40.0,
-                    width: 50.0,
-                    child: Center(
-                      child: Text(
-                        'Rs 248',
+                    height: 25.0,
+                    width: 80.0,
+                    child: Text(
+                      '0.0',
                         style: TextStyle(
-                            color: Colors.black87,
+                            fontSize: 19.0,
+                            color: Colors.orangeAccent,
                             fontFamily: 'Quicksand',
                             fontWeight: FontWeight.bold),
                       ),
-                    ),
                   ),
-                  SizedBox(width: 35.0),
-
+                  SizedBox(width: 55.0),
                   Container(
                     child: FlatButton(
                       color: Colors.redAccent,
