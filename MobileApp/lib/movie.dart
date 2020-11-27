@@ -199,7 +199,7 @@ class _SingleMovieState extends State<SingleMovie> {
                       ),
                     ),
                     DefaultTabController(
-                        length: 4,
+                        length: 1,
                         initialIndex: 0,
                         child: Column(
                           children: <Widget>[
@@ -209,10 +209,8 @@ class _SingleMovieState extends State<SingleMovie> {
                               unselectedLabelColor: textColor,
                               isScrollable: true,
                               tabs: [
-                                Tab(text: 'Dettagli',),
-                                Tab(text: 'Prezzi',),
-                                Tab(text: 'Recensioni',),
-                                Tab(text: 'Mappa',)
+                                Tab(text: 'RECENSIONI',),
+
                               ],
                             ),
 
@@ -224,11 +222,8 @@ class _SingleMovieState extends State<SingleMovie> {
                                         padding: EdgeInsets.all(10),
                                         child: Text(movieData.city),
                                     ),
+                                ]
 
-                                    Center(child: Text('Prezzi here')),
-                                    Center(child: Text('Reviews here')),
-                                    Center(child: Text('Near by here')),
-                                  ],
                                 ))
                           ],
                         )

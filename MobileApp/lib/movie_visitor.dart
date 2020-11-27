@@ -159,7 +159,7 @@ class _SingleMovieVisitorState extends State<SingleMovieVisitor> {
                       ),
                     ),
                     DefaultTabController(
-                        length: 4,
+                        length: 1,
                         initialIndex: 0,
                         child: Column(
                           children: <Widget>[
@@ -169,10 +169,7 @@ class _SingleMovieVisitorState extends State<SingleMovieVisitor> {
                               unselectedLabelColor: textColor,
                               isScrollable: true,
                               tabs: [
-                                Tab(text: 'Details',),
-                                Tab(text: 'Rooms',),
-                                Tab(text: 'Reviews',),
-                                Tab(text: 'Near By',)
+                                Tab(text: 'RECENSIONI',),
                               ],
                             ),
 
@@ -188,10 +185,6 @@ class _SingleMovieVisitorState extends State<SingleMovieVisitor> {
                                           ),
                                         )
                                     ),
-
-                                    Center(child: Text('Reviews here')),
-                                    Center(child: Text('Reviews here')),
-                                    Center(child: Text('Near by here')),
                                   ],
                                 ))
                           ],
