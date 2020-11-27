@@ -51,7 +51,7 @@ flutter:
 
   assets:
   - assets/images/
-  - assets/hotel/
+
   fonts:
     - family: poppins-extra-light
       fonts:
