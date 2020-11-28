@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'movie_app_theme.dart';
-import 'models/popular_filter_list.dart';
+
 
 class FiltersScreen extends StatefulWidget {
   @override
@@ -9,12 +9,6 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  List<PopularFilterListData> popularFilterListData =
-      PopularFilterListData.starFList;
-  List<PopularFilterListData> accomodationListData =
-      PopularFilterListData.accomodationList;
-  List<PopularFilterListData> priceListData =
-      PopularFilterListData.priceList;
   double distValue = 50.0;
 
   @override
@@ -38,15 +32,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     const Divider(
                       height: 1,
                     ),
-                    starsnumberFilter(),
-                    const Divider(
-                      height: 1,
-                    ),
-                    priceRangeFilter(),
-                    const Divider(
-                      height: 1,
-                    ),
-                    accomodationFilter(),
+
                   ],
                 ),
               ),
@@ -80,7 +66,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     },
                     child: Center(
                       child: Text(
-                        'Apply',
+                        'Applica',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
@@ -99,88 +85,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
 
 
-  List<Widget> getAccomodationListUI() {
-    final List<Widget> noList = <Widget>[];
-    for (int i = 0; i < accomodationListData.length; i++) {
-      final PopularFilterListData date = accomodationListData[i];
-      noList.add(
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-            onTap: () {
-              setState(() {
-                checkAppPosition(i);
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      date.titleTxt,
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  CupertinoSwitch(
-                    activeColor: date.isSelected
-                        ? MovieAppTheme.buildLightTheme().primaryColor
-                        : Colors.grey.withOpacity(0.6),
-                    onChanged: (bool value) {
-                      setState(() {
-                        checkAppPosition(i);
-                      });
-                    },
-                    value: date.isSelected,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-      if (i == 0) {
-        noList.add(const Divider(
-          height: 1,
-        ));
-      }
-    }
-    return noList;
-  }
 
-  void checkAppPosition(int index) {
-    if (index == 0) {
-      if (accomodationListData[0].isSelected) {
-        accomodationListData.forEach((d) {
-          d.isSelected = false;
-        });
-      } else {
-        accomodationListData.forEach((d) {
-          d.isSelected = true;
-        });
-      }
-    } else {
-      accomodationListData[index].isSelected =
-          !accomodationListData[index].isSelected;
 
-      int count = 0;
-      for (int i = 0; i < accomodationListData.length; i++) {
-        if (i != 0) {
-          final PopularFilterListData data = accomodationListData[i];
-          if (data.isSelected) {
-            count += 1;
-          }
-        }
-      }
 
-      if (count == accomodationListData.length - 1) {
-        accomodationListData[0].isSelected = true;
-      } else {
-        accomodationListData[0].isSelected = false;
-      }
-    }
-  }
 
   Widget accomodationFilter() {
     return Column(
@@ -201,9 +108,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         ),
         Padding(
           padding: const EdgeInsets.only(right: 16, left: 16),
-          child: Column(
-            children: getPListAccomodation(),
-          ),
+
         ),
         const SizedBox(
           height: 8,
@@ -212,263 +117,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  Widget starsnumberFilter() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-          child: Text(
-            'Numero di stelle',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.grey,
-                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
-                fontWeight: FontWeight.normal),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16, left: 16),
-          child: Column(
-            children: getPList(),
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        )
-      ],
-    );
-  }
 
-  Widget priceRangeFilter() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding:
-          const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-          child: Text(
-            'Fascia di prezzo',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.grey,
-                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
-                fontWeight: FontWeight.normal),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16, left: 16),
-          child: Column(
-            children: getPListPrice(),
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        )
-      ],
-    );
-  }
 
-  List<Widget> getPList() {
-    final List<Widget> noList = <Widget>[];
-    int count = 0;
-    const int columnCount = 2;
-    for (int i = 0; i < popularFilterListData.length / columnCount; i++) {
-      final List<Widget> listUI = <Widget>[];
-      for (int i = 0; i < columnCount; i++) {
-        try {
-          final PopularFilterListData date = popularFilterListData[count];
-          listUI.add(Expanded(
-            child: Row(
-              children: <Widget>[
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                    onTap: () {
-                      setState(() {
-                        date.isSelected = !date.isSelected;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            date.isSelected
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank,
-                            color: date.isSelected
-                                ? MovieAppTheme.buildLightTheme().primaryColor
-                                : Colors.grey.withOpacity(0.6),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            date.titleTxt,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ));
-          if (count < popularFilterListData.length - 1) {
-            count += 1;
-          } else {
-            break;
-          }
-        } catch (e) {
-          print(e);
-        }
-      }
-      noList.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: listUI,
-      ));
-    }
-    return noList;
-  }
 
-  List<Widget> getPListPrice() {
-    final List<Widget> noList = <Widget>[];
-    int count = 0;
-    const int columnCount = 2;
-    for (int i = 0; i < priceListData.length / columnCount; i++) {
-      final List<Widget> listUI = <Widget>[];
-      for (int i = 0; i < columnCount; i++) {
-        try {
-          final PopularFilterListData date = priceListData[count];
-          listUI.add(Expanded(
-            child: Row(
-              children: <Widget>[
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                    onTap: () {
-                      setState(() {
-                        date.isSelected = !date.isSelected;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            date.isSelected
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank,
-                            color: date.isSelected
-                                ? MovieAppTheme.buildLightTheme().primaryColor
-                                : Colors.grey.withOpacity(0.6),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            date.titleTxt,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ));
-          if (count < priceListData.length - 1) {
-            count += 1;
-          } else {
-            break;
-          }
-        } catch (e) {
-          print(e);
-        }
-      }
-      noList.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: listUI,
-      ));
-    }
-    return noList;
-  }
 
-  List<Widget> getPListAccomodation() {
-    final List<Widget> noList = <Widget>[];
-    int count = 0;
-    const int columnCount = 2;
-    for (int i = 0; i < accomodationListData.length / columnCount; i++) {
-      final List<Widget> listUI = <Widget>[];
-      for (int i = 0; i < columnCount; i++) {
-        try {
-          final PopularFilterListData date = accomodationListData[count];
-          listUI.add(Expanded(
-            child: Row(
-              children: <Widget>[
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                    onTap: () {
-                      setState(() {
-                        date.isSelected = !date.isSelected;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            date.isSelected
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank,
-                            color: date.isSelected
-                                ? MovieAppTheme.buildLightTheme().primaryColor
-                                : Colors.grey.withOpacity(0.6),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            date.titleTxt,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ));
-          if (count < accomodationListData.length - 1) {
-            count += 1;
-          } else {
-            break;
-          }
-        } catch (e) {
-          print(e);
-        }
-      }
-      noList.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: listUI,
-      ));
-    }
-    return noList;
-  }
+
+
+
+
+
 
   Widget provinceFilter() {
     return Column(

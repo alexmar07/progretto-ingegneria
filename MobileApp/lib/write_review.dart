@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'movie_app_theme.dart';
-import 'models/popular_filter_list.dart';
 import 'package:http/http.dart' as http;
 
 class WriteReview extends StatefulWidget {
@@ -12,8 +11,7 @@ class WriteReview extends StatefulWidget {
 // ignore: camel_case_types
 
 class  _WriteReviewState extends State<WriteReview> {
-  List<PopularFilterListData> popularFilterListData =
-      PopularFilterListData.starList;
+
 
 
 
@@ -228,71 +226,7 @@ class  _WriteReviewState extends State<WriteReview> {
   }
 
 
-  List<Widget> getStarList() {
-    final List<Widget> noList = <Widget>[];
-    int count = 0;
-    const int columnCount = 2;
-    for (int i = 0; i < popularFilterListData.length / columnCount; i++) {
-      final List<Widget> listUI = <Widget>[];
-      for (int i = 0; i < columnCount; i++) {
-        try {
-          final PopularFilterListData date = popularFilterListData[count];
-          listUI.add(Expanded(
-            child: Row(
-              children: <Widget>[
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                    onTap: () {
-                      setState(() {
-                        date.isSelected = !date.isSelected;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            date.isSelected
-                                ? Icons.star
-                                : Icons.check_box_outline_blank,
-                            color: date.isSelected
-                                ? MovieAppTheme.buildLightTheme().primaryColor
-                                : Colors.grey.withOpacity(0.6),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            date.titleTxt,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ));
-          if (count < popularFilterListData.length - 1) {
-            count += 1;
-          } else {
-            break;
-          }
-        } catch (e) {
-          print(e);
-        }
-      }
-      noList.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: listUI,
-      ));
-    }
-    return noList;
-  }
+
 
 
 
