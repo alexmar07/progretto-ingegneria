@@ -138,16 +138,8 @@ class MovieListViewVisitor extends StatelessWidget {
                                                   const EdgeInsets.only(top: 4),
                                               child: Row(
                                                 children: <Widget>[
-                                                  SmoothStarRating(
-                                                    allowHalfRating: true,
-                                                    starCount: 5,
-                                                    rating: movieData.rating,
-                                                    size: 20,
-                                                    color: Colors.yellow,
-                                                    borderColor: Colors.yellow,
-                                                  ),
                                                   Text(
-                                                    ' ${movieData.reviews} Reviews',
+                                                    ' ${movieData.reviews} RATING',
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         color: Colors.grey

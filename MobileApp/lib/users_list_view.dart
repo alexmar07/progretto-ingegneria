@@ -5,22 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:INGSW_MezMar/movie.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'models/users_list_data.dart';
 import 'movie.dart';
 import 'package:http/http.dart' as http;
 import 'models/movie_list_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class MovieListView extends StatelessWidget {
-  const MovieListView(
+class UsersListView extends StatelessWidget {
+  const UsersListView(
       {Key key,
-      this.movieData,
+      this.userData,
       this.animationController,
       this.animation,
       this.callback})
       : super(key: key);
 
   final VoidCallback callback;
-  final MovieListData movieData;
+  final UsersListData userData;
   final AnimationController animationController;
   final Animation<dynamic> animation;
 
@@ -39,15 +40,6 @@ class MovieListView extends StatelessWidget {
                   left: 24, right: 24, top: 8, bottom: 16),
               child: InkWell(
                 splashColor: Colors.transparent,
-                onTap: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  Navigator.push<dynamic>(
-                    context,
-                    MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) => SingleMovie(movieData.id),
-                        fullscreenDialog: true),
-                  );
-                },
                 child: Container(
 
                   decoration: BoxDecoration(
@@ -67,12 +59,7 @@ class MovieListView extends StatelessWidget {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            AspectRatio(
-                              aspectRatio: 2,
-                              child: CachedNetworkImage(
-                                imageUrl: movieData.imagePath
-                              ),
-                            ),
+
                             Container(
                               color: Colors.white,
                               child: Row(
@@ -91,11 +78,11 @@ class MovieListView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              movieData.titleTxt,
+                                              userData.name,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 22,
+                                                fontSize: 30,
                                               ),
                                             ),
                                             Row(
@@ -105,7 +92,7 @@ class MovieListView extends StatelessWidget {
                                                   MainAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  movieData.titleTxt,
+                                                  userData.name,//qui va lo username
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.grey
@@ -125,16 +112,19 @@ class MovieListView extends StatelessWidget {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.only(top: 4),
+                                                  const EdgeInsets.only(top: 1),
                                               child: Row(
                                                 children: <Widget>[
-                                                  Text(
-                                                    ' ${movieData.reviews} RATING',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.grey
-                                                            .withOpacity(0.8)),
-                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.only(left: 200,),
+                                                    child: FlatButton(
+                                                      color: Colors.teal,
+                                                      onPressed: (){},
+                                                      textColor: Colors.white,
+                                                      child: Icon(Icons.person_add),
+                                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                                                    ),
+                                                  )
                                                 ],
                                               ),
                                             ),

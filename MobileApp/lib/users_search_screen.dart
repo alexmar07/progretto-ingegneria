@@ -1,21 +1,22 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'filters_screen.dart';
+import 'models/users_list_data.dart';
 import 'movie_app_theme.dart';
-import 'movie_list_view.dart';
-import 'models/movie_list_data.dart';
+import 'users_list_view.dart';
 
-class MovieSearchScreen extends StatefulWidget {
+
+
+class UsersSearchScreen extends StatefulWidget {
   @override
-  _MovieSearchScreenState createState() => _MovieSearchScreenState();
+  _UsersSearchScreenState createState() => _UsersSearchScreenState();
 }
 
-class _MovieSearchScreenState extends State<MovieSearchScreen>
+class _UsersSearchScreenState extends State<UsersSearchScreen>
     with TickerProviderStateMixin {
   AnimationController animationController;
-  var x = MovieListData().fetchMovieListData();
-  List<MovieListData> movieList = MovieListData.movieList;
+  var x = UsersListData().fetchUsersListData();
+  List<UsersListData> usersList = UsersListData.usersList;
   final ScrollController _scrollController = ScrollController();
 
   DateTime startDate = DateTime.now();
@@ -75,25 +76,19 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                                 );
                               }, childCount: 1),
                             ),
-                            SliverPersistentHeader(
-                              pinned: true,
-                              floating: true,
-                              delegate: ContestTabHeader(
-                                getFilterBarUI(),
-                              ),
-                            ),
+
                           ];
                         },
                         body: Container(
                           color:
                           MovieAppTheme.buildLightTheme().backgroundColor,
                           child: ListView.builder(
-                            itemCount: movieList.length,
+                            itemCount: usersList.length,
                             padding: const EdgeInsets.only(top: 8),
                             scrollDirection: Axis.vertical,
                             itemBuilder: (BuildContext context, int index) {
                               final int count =
-                              movieList.length > 10 ? 10 : movieList.length;
+                              usersList.length > 10 ? 10 : usersList.length;
                               final Animation<double> animation =
                                   Tween<double>(begin: 0.0, end: 1.0).animate(
                                       CurvedAnimation(
@@ -102,9 +97,9 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                                               (1 / count) * index, 1.0,
                                               curve: Curves.fastOutSlowIn)));
                               animationController.forward();
-                              return MovieListView(
+                              return UsersListView(
                                 callback: () {},
-                                movieData: movieList[index],
+                                userData: usersList[index],
                                 animation: animation,
                                 animationController: animationController,
                               );
@@ -145,11 +140,11 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                   return const SizedBox();
                 } else {
                   return ListView.builder(
-                    itemCount: movieList.length,
+                    itemCount: usersList.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
                       final int count =
-                      movieList.length > 10 ? 10 : movieList.length;
+                      usersList.length > 10 ? 10 : usersList.length;
                       final Animation<double> animation =
                           Tween<double>(begin: 0.0, end: 1.0).animate(
                               CurvedAnimation(
@@ -158,9 +153,9 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                                       curve: Curves.fastOutSlowIn)));
                       animationController.forward();
 
-                      return MovieListView(
+                      return UsersListView(
                         callback: () {},
-                        movieData: movieList[index],
+                        userData: usersList[index],
                         animation: animation,
                         animationController: animationController,
                       );
@@ -175,10 +170,10 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
     );
   }
 
-  Widget getMovieViewList() {
-    final List<Widget> movieListViews = <Widget>[];
-    for (int i = 0; i < movieList.length; i++) {
-      final int count = movieList.length;
+  Widget getUsersViewList() {
+    final List<Widget> usersListViews = <Widget>[];
+    for (int i = 0; i < usersList.length; i++) {
+      final int count = usersList.length;
       final Animation<double> animation =
           Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
@@ -186,10 +181,10 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
           curve: Interval((1 / count) * i, 1.0, curve: Curves.fastOutSlowIn),
         ),
       );
-      movieListViews.add(
-        MovieListView(
+      usersListViews.add(
+        UsersListView(
           callback: () {},
-          movieData: movieList[i],
+          userData: usersList[i],
           animation: animation,
           animationController: animationController,
         ),
@@ -197,7 +192,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
     }
     animationController.forward();
     return Column(
-      children: movieListViews,
+      children: usersListViews,
     );
   }
 
@@ -277,90 +272,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
     );
   }
 
-  Widget getFilterBarUI() {
-    return Stack(
-      children: <Widget>[
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            height: 24,
-            decoration: BoxDecoration(
-              color: MovieAppTheme.buildLightTheme().backgroundColor,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    offset: const Offset(0, -2),
-                    blurRadius: 8.0),
-              ],
-            ),
-          ),
-        ),
-        Container(
-          color: MovieAppTheme.buildLightTheme().backgroundColor,
-          child: Padding(
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
-            child: Row(
-              children: <Widget>[
 
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    focusColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.grey.withOpacity(0.2),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                    onTap: () {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      Navigator.push<dynamic>(
-                        context,
-                        MaterialPageRoute<dynamic>(
-                            builder: (BuildContext context) => FiltersScreen(),
-                            fullscreenDialog: true),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            'Filtri',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w100,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(Icons.sort,
-                                color: MovieAppTheme.buildLightTheme()
-                                    .primaryColor),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Divider(
-            height: 1,
-          ),
-        )
-      ],
-    );
-  }
 
 
 

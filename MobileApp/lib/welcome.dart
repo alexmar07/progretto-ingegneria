@@ -1,3 +1,4 @@
+import 'package:INGSW_MezMar/home_users.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -25,10 +26,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     else if(Provider.of<Tabs>(context).currentIndex == 2) {
       return Saved();
     }
-    /*
+
     else if(Provider.of<Tabs>(context).currentIndex == 3) {
-      return ProfilePage();
-    }*/
+      return HomeUsers();
+    }
 
 
   }
