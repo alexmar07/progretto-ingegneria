@@ -8,9 +8,15 @@ public class Newsletter_Controller {
 
     @FXML
     private Button btnNewsletter;
+    private Button btnLogout;
 
     @FXML
     void sendNewsletter(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doLogout(ActionEvent event) {
 
     }
 }
