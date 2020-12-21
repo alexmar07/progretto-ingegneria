@@ -10,13 +10,14 @@ import java.net.URL;
 
 public class Service {
 
-    private static final String REQUEST_URL = "https://appprogetto.altervista.org/login";
-    private static final String POST_PARAMS = "";
+    private static final String REQUEST_URL = "http://appprogetto.altervista.org/index.php/login";
+    private static final String POST_PARAMS = "email=admin@admin.com&password=password";
     private static final String USER_AGENT = "Mozilla/5.0" ;
 
-    private static void sendPOST() throws IOException {
+    public static void sendPOST() throws IOException {
 
         URL obj = new URL(REQUEST_URL);
+        System.out.println(obj.toString());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
@@ -24,6 +25,7 @@ public class Service {
         // For POST only - START
         con.setDoOutput(true);
         OutputStream os = con.getOutputStream();
+        System.out.println("ciao");
         os.write(POST_PARAMS.getBytes());
         os.flush();
         os.close();
