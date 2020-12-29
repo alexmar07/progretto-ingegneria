@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'home.dart';
+import 'notifications.dart';
 import 'saved.dart';
 import 'to_be_seen.dart';
 import 'partials/drawer.dart';
@@ -24,10 +25,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       return ToBeSeen();
     }
     else if(Provider.of<Tabs>(context).currentIndex == 2) {
+      return Notifications();
+    }
+    else if(Provider.of<Tabs>(context).currentIndex == 3) {
       return Saved();
     }
 
-    else if(Provider.of<Tabs>(context).currentIndex == 3) {
+    else if(Provider.of<Tabs>(context).currentIndex == 4) {
       return HomeUsers();
     }
 
@@ -67,6 +71,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               inactiveColor: Colors.black54
           ),
           BottomNavyBarItem(
+              icon: Icon(Icons.notifications),
+              title: Text('NOTIFICHE'),
+              activeColor: Colors.teal,
+              inactiveColor: Colors.black54
+          ),
+          BottomNavyBarItem(
               icon: Icon(Icons.favorite_border),
               title: Text('PREFERITI'),
               activeColor: Colors.teal,
@@ -78,6 +88,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               activeColor: Colors.teal,
               inactiveColor: Colors.black54
           ),
+
         ],
       ),
     );

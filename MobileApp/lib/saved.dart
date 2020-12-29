@@ -14,7 +14,7 @@ class _SavedState extends State<Saved> {
         leading: GestureDetector(child: Icon(Icons.arrow_back),onTap: (){
           Provider.of<Tabs>(context).changeIndex(0);
         },),
-        title: Text('Lista di film Preferiti',style: TextStyle(fontFamily: 'poppins-regular',fontWeight: FontWeight.w500),),
+        title: Text('Lista di film preferiti',style: TextStyle(fontFamily: 'poppins-regular',fontWeight: FontWeight.w500),),
       ),
       body: ListView(
         children: <Widget>[
@@ -31,7 +31,7 @@ class _SavedState extends State<Saved> {
 
 
 
-Widget itemCard(String title, String imgPath, bool isFavorite) {
+Widget itemCard(String title, String imgPath, bool isSaved) {
   return Padding(
     padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
     child: Container(

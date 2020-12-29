@@ -24,11 +24,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    provinceFilter(),
+                    genreFilter(),
                     const Divider(
                       height: 1,
                     ),
-                    cityFilter(),
+                    yearFilter(),
                     const Divider(
                       height: 1,
                     ),
@@ -84,50 +84,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
 
-
-
-
-
-
-  Widget accomodationFilter() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding:
-          const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-          child: Text(
-            'Tipo di struttura',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.grey,
-                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
-                fontWeight: FontWeight.normal),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16, left: 16),
-
-        ),
-        const SizedBox(
-          height: 8,
-        )
-      ],
-    );
-  }
-
-
-
-
-
-
-
-
-
-
-
-  Widget provinceFilter() {
+  Widget genreFilter() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +92,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Provincia',
+            'Genere',
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Colors.grey,
@@ -170,7 +127,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   style: TextStyle(
                       color: Colors.teal
                   ),
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   cursorColor: Colors.teal,
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -191,7 +148,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  Widget cityFilter() {
+  Widget yearFilter() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +156,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Città',
+            'Anno di uscita',
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Colors.grey,

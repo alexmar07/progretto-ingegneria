@@ -315,10 +315,10 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
             Expanded(
               child: Center(
                 child: Text(
-                  'Ricerca un film',
+                  'Ricerca altri CineMates',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 22,
+                    fontSize: 17,
                   ),
                 ),
               ),

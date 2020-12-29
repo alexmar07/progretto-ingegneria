@@ -3,13 +3,11 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:INGSW_MezMar/movie.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'models/users_list_data.dart';
-import 'movie.dart';
+
 import 'package:http/http.dart' as http;
-import 'models/movie_list_data.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
+
 
 class UsersListView extends StatelessWidget {
   const UsersListView(
@@ -102,7 +100,7 @@ class UsersListView extends StatelessWidget {
                                                   width: 4,
                                                 ),
                                                 Icon(
-                                                  FontAwesomeIcons.mapMarkerAlt,
+                                                  FontAwesomeIcons.mapMarkedAlt,
                                                   size: 12,
                                                   color: Colors.white,
                                                 ),

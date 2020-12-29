@@ -14,7 +14,7 @@ class _ToBeSeenState extends State<ToBeSeen> {
         leading: GestureDetector(child: Icon(Icons.arrow_back),onTap: (){
           Provider.of<Tabs>(context).changeIndex(0);
         },),
-        title: Text('Lista di film Preferiti',style: TextStyle(fontFamily: 'poppins-regular',fontWeight: FontWeight.w500),),
+        title: Text('Lista di film da vedere',style: TextStyle(fontFamily: 'poppins-regular',fontWeight: FontWeight.w500),),
       ),
       body: ListView(
         children: <Widget>[
