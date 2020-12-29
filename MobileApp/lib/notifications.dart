@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'models/tabs.dart';
 import 'package:provider/provider.dart';
@@ -88,40 +89,43 @@ Widget itemCard( bool isConnected) {
               Container(
 
                 width: 375.0,
-                child: FlatButton(
-                  color: Colors.teal,
-                  onPressed: (){},
-                  textColor: Colors.white,
-                  child: Center(
-                    child: Text(
-                      'ACCETTA',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Colors.white),
+                child: new Row (
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FlatButton (
+                      color: Colors.teal,
+                      onPressed: (){},
+                      textColor: Colors.white,
+                      child: Center(
+                        child: Text(
+                          'ACCETTA',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              color: Colors.white),
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                     ),
-                  ),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                ),
-              ),
-              Container(
-                width: 375.0,
-                child: FlatButton(
-                  color: Colors.redAccent,
-                  onPressed: (){},
-                  textColor: Colors.white,
-                  child: Center(
-                    child: Text(
-                      'RIFIUTA',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Colors.white),
+                    FlatButton(
+                      color: Colors.redAccent,
+                      onPressed: (){},
+                      textColor: Colors.white,
+                      child: Center(
+                        child: Text(
+                          'RIFIUTA',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              color: Colors.white),
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                     ),
-                  ),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                ),
+                  ],
+                )
               ),
+
 
 
             ],

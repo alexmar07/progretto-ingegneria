@@ -120,7 +120,7 @@ Widget itemCard(String title, String imgPath, bool isFavorite) {
                       color: Colors.redAccent,
                       onPressed: (){},
                       textColor: Colors.white,
-                      child: Icon(Icons.remove_red_eye_outlined),
+                      child: Icon(Icons.remove_red_eye),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                     ),
                   )

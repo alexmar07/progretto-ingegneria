@@ -370,8 +370,21 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                     color: Colors.teal,
                     onPressed: ()async {
-                      Provider.of<Auth>(context).changeToken('demo');
-                      Provider.of<Auth>(context).login();
+                      Provider.of<Auth>(context).setEmail(_logindata.email);
+                      Provider.of<Auth>(context).setPassword(_logindata.password);
+                      var jwt = await Provider.of<Auth>(context).getJwt();
+                      if ( jwt != false ) {
+                        Provider.of<Auth>(context).login();
+                        Provider.of<Auth>(context).changeToken(jwt);
+                      }
+                      else {
+                        final snackBar = SnackBar(
+                            content: Text(Provider.of<Auth>(context).errorMessage, textAlign: TextAlign.center,),
+
+                        );
+                        Scaffold.of(context).showSnackBar(snackBar);
+                      }
+
                     },
                     child: new Container(
                       padding: const EdgeInsets.symmetric(

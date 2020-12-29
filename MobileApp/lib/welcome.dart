@@ -83,7 +83,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               inactiveColor: Colors.black54
           ),
           BottomNavyBarItem(
-              icon: Icon(Icons.supervised_user_circle_sharp),
+              icon: Icon(Icons.supervised_user_circle),
               title: Text('UTENTI'),
               activeColor: Colors.teal,
               inactiveColor: Colors.black54
