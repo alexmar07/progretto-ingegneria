@@ -129,7 +129,7 @@ class MovieListView extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Text(
-                                                    ' ${movieData.reviews} RATING',
+                                                    ' ${movieData.n_reviews} RATING',
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         color: Colors.grey

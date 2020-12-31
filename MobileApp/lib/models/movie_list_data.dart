@@ -6,30 +6,24 @@ class MovieListData {
   MovieListData({
     this.imagePath = '',
     this.titleTxt = '',
-    this.reviews = 80,
+    this.n_reviews = 0,
     this.rating = 0.0,
     this.id = 0,
-    this.address = '',
-    this.city = '',
-    this.province = '',
-    this.type = '',
-    this.priceRange = '',
+    this.genre = '',
+    this.year = '',
+
 
   });
 
   String imagePath;
   String titleTxt;
   String subTxt;
-  double dist;
   double rating;
-  int reviews;
-  int perNight;
+  int n_reviews;
   int id;
-  String address;
-  String city;
-  String province;
-  String type;
-  String priceRange;
+  String genre;
+  String year;
+
 
 
   static List<MovieListData> movieList = <MovieListData>[];
@@ -43,14 +37,14 @@ class MovieListData {
         id : i['id'],
         imagePath: i['cover_image'],
         titleTxt: i['name'],
-        reviews: i['n_reviews'],
+        n_reviews: i['n_reviews'],
         rating: double.parse(i['valutation']),
       ));
     }
   }
 
   Future<MovieListData> fetchMovieListData() async {
-    final response = await http.get('http://appprogetto.altervista.org/api/public/index.php/accommodations');
+    final response = await http.get('https://api.themoviedb.org/3/discover/movie?api_key=6094a309fc93881d4b116756680a382c&language=it-IT&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
@@ -76,13 +70,11 @@ class MovieListData {
         id : data['id'],
         imagePath: data['cover_image'],
         titleTxt: data['name'],
-        reviews: data['n_reviews'],
+        n_reviews: data['n_reviews'],
         rating: double.parse(data['valutation']),
-        address: data['address'],
-        city: data['city'],
-        province: data['province'],
-        type: data['type'],
-        priceRange: data['type_price'],
+        genre: data['genre'],
+        year: data['year'],
+
       );
      print(singleMovie.imagePath);
     } else {

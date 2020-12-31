@@ -144,7 +144,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Text(
-                                  movieData.reviews.toString(),
+                                  movieData.n_reviews.toString(),
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: textColor,
@@ -220,7 +220,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                   children: [
                                     Container(
                                         padding: EdgeInsets.all(10),
-                                        child: Text(movieData.city),
+                                        child: Text(movieData.genre),
                                     ),
                                 ]
 

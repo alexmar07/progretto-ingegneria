@@ -120,17 +120,7 @@ class MovieListViewVisitor extends StatelessWidget {
                                                   size: 12,
                                                   color: Colors.white,
                                                 ),
-                                                Expanded(
-                                                  child: Text(
-                                                    '${movieData.dist.toStringAsFixed(1)} km to city',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.grey
-                                                            .withOpacity(0.8)),
-                                                  ),
-                                                ),
+
                                               ],
                                             ),
                                             Padding(
@@ -139,7 +129,7 @@ class MovieListViewVisitor extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Text(
-                                                    ' ${movieData.reviews} RATING',
+                                                    ' ${movieData.n_reviews} RATING',
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         color: Colors.grey
@@ -163,7 +153,7 @@ class MovieListViewVisitor extends StatelessWidget {
                                           CrossAxisAlignment.end,
                                       children: <Widget>[
                                         Text(
-                                          '\$${movieData.perNight}',
+                                          '\$${movieData.year}',
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
