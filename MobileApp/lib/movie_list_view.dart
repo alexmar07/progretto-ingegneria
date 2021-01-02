@@ -62,7 +62,7 @@ class MovieListView extends StatelessWidget {
                     ],
                   ),
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(26.0)),
                     child: Stack(
                       children: <Widget>[
                         Column(
