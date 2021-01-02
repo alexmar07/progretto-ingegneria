@@ -8,6 +8,7 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'movie.dart';
 import 'package:http/http.dart' as http;
 import 'models/movie_list_data.dart';
+import 'models/movie.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieListView extends StatelessWidget {
@@ -20,7 +21,7 @@ class MovieListView extends StatelessWidget {
       : super(key: key);
 
   final VoidCallback callback;
-  final MovieListData movieData;
+  final Movie movieData;
   final AnimationController animationController;
   final Animation<dynamic> animation;
 
@@ -44,12 +45,12 @@ class MovieListView extends StatelessWidget {
                   Navigator.push<dynamic>(
                     context,
                     MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) => SingleMovie(movieData.id),
+                        builder: (BuildContext context) =>
+                            SingleMovie(movieData.id),
                         fullscreenDialog: true),
                   );
                 },
                 child: Container(
-
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                     boxShadow: <BoxShadow>[
@@ -61,7 +62,6 @@ class MovieListView extends StatelessWidget {
                     ],
                   ),
                   child: ClipRRect(
-
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                     child: Stack(
                       children: <Widget>[
@@ -70,8 +70,9 @@ class MovieListView extends StatelessWidget {
                             AspectRatio(
                               aspectRatio: 2,
                               child: CachedNetworkImage(
-                                imageUrl: movieData.imagePath
-                              ),
+                                  imageUrl:
+                                      'https://image.tmdb.org/t/p/original/' +
+                                          movieData.image),
                             ),
                             Container(
                               color: Colors.white,
@@ -91,7 +92,7 @@ class MovieListView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              movieData.titleTxt,
+                                              movieData.title,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -104,13 +105,6 @@ class MovieListView extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               children: <Widget>[
-                                                Text(
-                                                  movieData.titleTxt,
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.grey
-                                                          .withOpacity(0.8)),
-                                                ),
                                                 const SizedBox(
                                                   width: 4,
                                                 ),
@@ -119,8 +113,6 @@ class MovieListView extends StatelessWidget {
                                                   size: 12,
                                                   color: Colors.white,
                                                 ),
-
-
                                               ],
                                             ),
                                             Padding(
@@ -129,7 +121,7 @@ class MovieListView extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Text(
-                                                    ' ${movieData.n_reviews} RATING',
+                                                    ' ${movieData.rating} RATING',
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         color: Colors.grey
@@ -151,10 +143,7 @@ class MovieListView extends StatelessWidget {
                                           MainAxisAlignment.center,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
-                                      children: <Widget>[
-
-
-                                      ],
+                                      children: <Widget>[],
                                     ),
                                   ),
                                 ],
@@ -162,7 +151,6 @@ class MovieListView extends StatelessWidget {
                             ),
                           ],
                         ),
-
                       ],
                     ),
                   ),

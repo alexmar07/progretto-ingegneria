@@ -13,25 +13,24 @@ class Hatkestays extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(builder: (_) => Auth()),
-          ChangeNotifierProvider(builder: (_) => Tabs()),
-        ],
-        child: Consumer<Auth>(
-          builder: (context, counter, _) {
-            return MaterialApp(
-              title: 'Hatke Stays',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.teal,
-              ),
-              home: App(),
-            );
-          },
-        ),
-      );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => Auth()),
+        ChangeNotifierProvider(builder: (_) => Tabs()),
+      ],
+      child: Consumer<Auth>(
+        builder: (context, counter, _) {
+          return MaterialApp(
+            title: 'Hatke Stays',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.teal,
+            ),
+            home: App(),
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -41,28 +40,26 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  checkAuth() async{
+  checkAuth() async {
     final prefs = await SharedPreferences.getInstance();
-    if(prefs.getString('token') != null) {
+    if (prefs.getString('token') != null) {
       final token = prefs.getString('token');
       Provider.of<Auth>(context).changeToken(token);
       Provider.of<Auth>(context).login();
-    }
-    else{
+    } else {
       Provider.of<Auth>(context).logout();
     }
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     checkAuth();
   }
+
   @override
   Widget build(BuildContext context) {
-
-    print(http.get('http://appprogetto.altervista.org/api/public/index.php/accommodations'));
-
     final auth = Provider.of<Auth>(context);
-    return auth.state? WelcomeScreen() : LoginPage();
+    return auth.state ? WelcomeScreen() : LoginPage();
   }
 }

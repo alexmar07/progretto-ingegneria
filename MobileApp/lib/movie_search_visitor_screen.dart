@@ -7,17 +7,19 @@ import 'package:intl/intl.dart';
 import 'filters_screen.dart';
 import 'movie_app_theme.dart';
 import 'movie_list_view.dart';
+import 'models/movie.dart';
 import 'models/movie_list_data.dart';
 
 class MovieSearchVisitorScreen extends StatefulWidget {
   @override
-  _MovieSearchVisitorScreenState createState() => _MovieSearchVisitorScreenState();
+  _MovieSearchVisitorScreenState createState() =>
+      _MovieSearchVisitorScreenState();
 }
 
 class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
     with TickerProviderStateMixin {
   AnimationController animationController;
-  List<MovieListData> movieList = MovieListData.movieList;
+
   final ScrollController _scrollController = ScrollController();
 
   DateTime startDate = DateTime.now();
@@ -72,7 +74,6 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
                                 return Column(
                                   children: <Widget>[
                                     getSearchBarUI(),
-
                                   ],
                                 );
                               }, childCount: 1),
@@ -90,12 +91,11 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
                           color:
                               MovieAppTheme.buildLightTheme().backgroundColor,
                           child: ListView.builder(
-                            itemCount: movieList.length,
+                            itemCount: 50,
                             padding: const EdgeInsets.only(top: 8),
                             scrollDirection: Axis.vertical,
                             itemBuilder: (BuildContext context, int index) {
-                              final int count =
-                                  movieList.length > 10 ? 10 : movieList.length;
+                              final int count = 50;
                               final Animation<double> animation =
                                   Tween<double>(begin: 0.0, end: 1.0).animate(
                                       CurvedAnimation(
@@ -106,7 +106,7 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
                               animationController.forward();
                               return MovieListViewVisitor(
                                 callback: () {},
-                                movieData: movieList[index],
+                                movieData: new Movie(),
                                 animation: animation,
                                 animationController: animationController,
                               );
@@ -147,11 +147,10 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
                   return const SizedBox();
                 } else {
                   return ListView.builder(
-                    itemCount: movieList.length,
+                    itemCount: 50,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
-                      final int count =
-                          movieList.length > 10 ? 10 : movieList.length;
+                      final int count = 50;
                       final Animation<double> animation =
                           Tween<double>(begin: 0.0, end: 1.0).animate(
                               CurvedAnimation(
@@ -162,7 +161,7 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
 
                       return MovieListView(
                         callback: () {},
-                        movieData: movieList[index],
+                        movieData: new Movie(),
                         animation: animation,
                         animationController: animationController,
                       );
@@ -176,33 +175,6 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
       ),
     );
   }
-
-  Widget getMovieViewList() {
-    final List<Widget> movieListViews = <Widget>[];
-    for (int i = 0; i < movieList.length; i++) {
-      final int count = movieList.length;
-      final Animation<double> animation =
-          Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-          parent: animationController,
-          curve: Interval((1 / count) * i, 1.0, curve: Curves.fastOutSlowIn),
-        ),
-      );
-      movieListViews.add(
-        MovieListView(
-          callback: () {},
-          movieData: movieList[i],
-          animation: animation,
-          animationController: animationController,
-        ),
-      );
-    }
-    animationController.forward();
-    return Column(
-      children: movieListViews,
-    );
-  }
-
 
   Widget getSearchBarUI() {
     return Padding(
@@ -306,7 +278,6 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
                 const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
             child: Row(
               children: <Widget>[
-
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
@@ -364,8 +335,6 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
     );
   }
 
-
-
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
@@ -419,9 +388,7 @@ class _MovieSearchVisitorScreenState extends State<MovieSearchVisitorScreen>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-
-                ],
+                children: <Widget>[],
               ),
             )
           ],

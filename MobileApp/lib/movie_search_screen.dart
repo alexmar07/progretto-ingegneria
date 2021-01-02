@@ -5,6 +5,7 @@ import 'filters_screen.dart';
 import 'movie_app_theme.dart';
 import 'movie_list_view.dart';
 import 'models/movie_list_data.dart';
+import 'models/movie.dart';
 
 class MovieSearchScreen extends StatefulWidget {
   @override
@@ -14,8 +15,11 @@ class MovieSearchScreen extends StatefulWidget {
 class _MovieSearchScreenState extends State<MovieSearchScreen>
     with TickerProviderStateMixin {
   AnimationController animationController;
-  var x = MovieListData().fetchMovieListData();
-  List<MovieListData> movieList = MovieListData.movieList;
+
+  Future<MovieListData> futureMovieData;
+  MovieListData movie = new MovieListData();
+
+  // List<MovieListData> movieList = MovieListData.movieList;
   final ScrollController _scrollController = ScrollController();
 
   DateTime startDate = DateTime.now();
@@ -25,6 +29,9 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
   void initState() {
     animationController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
+
+    futureMovieData = movie.fetchMovieListData();
+
     super.initState();
   }
 
@@ -60,58 +67,30 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                     getAppBarUI(),
                     Expanded(
                       child: NestedScrollView(
-                        controller: _scrollController,
-                        headerSliverBuilder:
-                            (BuildContext context, bool innerBoxIsScrolled) {
-                          return <Widget>[
-                            SliverList(
-                              delegate: SliverChildBuilderDelegate(
-                                  (BuildContext context, int index) {
-                                return Column(
-                                  children: <Widget>[
-                                    getSearchBarUI(),
-
-                                  ],
-                                );
-                              }, childCount: 1),
-                            ),
-                            SliverPersistentHeader(
-                              pinned: true,
-                              floating: true,
-                              delegate: ContestTabHeader(
-                                getFilterBarUI(),
+                          controller: _scrollController,
+                          headerSliverBuilder:
+                              (BuildContext context, bool innerBoxIsScrolled) {
+                            return <Widget>[
+                              SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                    (BuildContext context, int index) {
+                                  return Column(
+                                    children: <Widget>[
+                                      getSearchBarUI(),
+                                    ],
+                                  );
+                                }, childCount: 1),
                               ),
-                            ),
-                          ];
-                        },
-                        body: Container(
-                          color:
-                          MovieAppTheme.buildLightTheme().backgroundColor,
-                          child: ListView.builder(
-                            itemCount: movieList.length,
-                            padding: const EdgeInsets.only(top: 8),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (BuildContext context, int index) {
-                              final int count =
-                              movieList.length > 10 ? 10 : movieList.length;
-                              final Animation<double> animation =
-                                  Tween<double>(begin: 0.0, end: 1.0).animate(
-                                      CurvedAnimation(
-                                          parent: animationController,
-                                          curve: Interval(
-                                              (1 / count) * index, 1.0,
-                                              curve: Curves.fastOutSlowIn)));
-                              animationController.forward();
-                              return MovieListView(
-                                callback: () {},
-                                movieData: movieList[index],
-                                animation: animation,
-                                animationController: animationController,
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                              SliverPersistentHeader(
+                                pinned: true,
+                                floating: true,
+                                delegate: ContestTabHeader(
+                                  getFilterBarUI(),
+                                ),
+                              ),
+                            ];
+                          },
+                          body: getListUI()),
                     )
                   ],
                 ),
@@ -138,18 +117,19 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height - 156 - 50,
-            child: FutureBuilder<bool>(
-              future: getData(),
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            child: FutureBuilder<MovieListData>(
+              future: futureMovieData,
+              builder: (BuildContext context,
+                  AsyncSnapshot<MovieListData> snapshot) {
+                print(snapshot.data.movies);
                 if (!snapshot.hasData) {
                   return const SizedBox();
                 } else {
                   return ListView.builder(
-                    itemCount: movieList.length,
+                    itemCount: 50,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
-                      final int count =
-                      movieList.length > 10 ? 10 : movieList.length;
+                      final int count = 50;
                       final Animation<double> animation =
                           Tween<double>(begin: 0.0, end: 1.0).animate(
                               CurvedAnimation(
@@ -160,7 +140,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
 
                       return MovieListView(
                         callback: () {},
-                        movieData: movieList[index],
+                        movieData: snapshot.data.movies[index],
                         animation: animation,
                         animationController: animationController,
                       );
@@ -174,33 +154,6 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
       ),
     );
   }
-
-  Widget getMovieViewList() {
-    final List<Widget> movieListViews = <Widget>[];
-    for (int i = 0; i < movieList.length; i++) {
-      final int count = movieList.length;
-      final Animation<double> animation =
-          Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-          parent: animationController,
-          curve: Interval((1 / count) * i, 1.0, curve: Curves.fastOutSlowIn),
-        ),
-      );
-      movieListViews.add(
-        MovieListView(
-          callback: () {},
-          movieData: movieList[i],
-          animation: animation,
-          animationController: animationController,
-        ),
-      );
-    }
-    animationController.forward();
-    return Column(
-      children: movieListViews,
-    );
-  }
-
 
   Widget getSearchBarUI() {
     return Padding(
@@ -304,7 +257,6 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                 const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
             child: Row(
               children: <Widget>[
-
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
@@ -362,8 +314,6 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
     );
   }
 
-
-
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
@@ -417,8 +367,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                ],
+                children: <Widget>[],
               ),
             )
           ],

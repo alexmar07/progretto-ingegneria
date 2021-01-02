@@ -7,6 +7,7 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'movie.dart';
 
 import 'models/movie_list_data.dart';
+import 'models/movie.dart';
 
 class MovieListViewVisitor extends StatelessWidget {
   const MovieListViewVisitor(
@@ -18,7 +19,7 @@ class MovieListViewVisitor extends StatelessWidget {
       : super(key: key);
 
   final VoidCallback callback;
-  final MovieListData movieData;
+  final Movie movieData;
   final AnimationController animationController;
   final Animation<dynamic> animation;
 
@@ -47,7 +48,6 @@ class MovieListViewVisitor extends StatelessWidget {
                   );
                 },
                 child: Container(
-
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                     boxShadow: <BoxShadow>[
@@ -59,19 +59,16 @@ class MovieListViewVisitor extends StatelessWidget {
                     ],
                   ),
                   child: ClipRRect(
-
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                     child: Stack(
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-
                             AspectRatio(
                               aspectRatio: 2,
                               child: Image.asset(
-                                movieData.imagePath,
+                                movieData.image,
                                 fit: BoxFit.cover,
-
                               ),
                             ),
                             Container(
@@ -92,7 +89,7 @@ class MovieListViewVisitor extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              movieData.titleTxt,
+                                              movieData.title,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -105,13 +102,6 @@ class MovieListViewVisitor extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               children: <Widget>[
-                                                Text(
-                                                 movieData.subTxt,
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.grey
-                                                          .withOpacity(0.8)),
-                                                ),
                                                 const SizedBox(
                                                   width: 4,
                                                 ),
@@ -120,7 +110,6 @@ class MovieListViewVisitor extends StatelessWidget {
                                                   size: 12,
                                                   color: Colors.white,
                                                 ),
-
                                               ],
                                             ),
                                             Padding(
@@ -129,7 +118,7 @@ class MovieListViewVisitor extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Text(
-                                                    ' ${movieData.n_reviews} RATING',
+                                                    ' ${movieData.rating} RATING',
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         color: Colors.grey
@@ -162,7 +151,6 @@ class MovieListViewVisitor extends StatelessWidget {
                                         ),
                                         Text(
                                           '/per night',
-
                                           style: TextStyle(
                                               fontSize: 14,
                                               color:
@@ -176,7 +164,6 @@ class MovieListViewVisitor extends StatelessWidget {
                             ),
                           ],
                         ),
-
                       ],
                     ),
                   ),
