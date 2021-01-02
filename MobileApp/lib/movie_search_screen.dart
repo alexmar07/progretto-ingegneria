@@ -116,7 +116,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
       child: Column(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height - 156 - 50,
+            height: MediaQuery.of(context).size.height - 170 - 50,
             child: FutureBuilder<MovieListData>(
               future: futureMovieData,
               builder: (BuildContext context,
