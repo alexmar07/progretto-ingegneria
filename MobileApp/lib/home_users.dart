@@ -93,14 +93,17 @@ class _HomeUsersState extends State<HomeUsers> {
           ];
         },
         body: Container(
-          child: Column(
-            children: <Widget>[
-              Divider(height: 200),
-              Text('Cerca altri Cinemates presenti sulla nostra app',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              Icon(Icons.supervised_user_circle, size: 150, color: Colors.teal)
-            ],
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
+              image: AssetImage('assets/images/friends_cinema.jpg'),
+              fit: BoxFit.cover,
+
+            ),
           ),
-        ));
+        )
+    );
   }
 }

@@ -36,7 +36,7 @@ class _WelcomeVisitorScreenState extends State<WelcomeVisitorScreen> {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.grey[200],
       body: screen(),
       drawer: AppDrawerVisitor(),
     );

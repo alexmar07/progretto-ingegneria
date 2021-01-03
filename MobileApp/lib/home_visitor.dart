@@ -92,10 +92,18 @@ class _HomeVisitorState extends State<HomeVisitor> {
             ),
           ];
         },
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[],
+        body: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
+              image: AssetImage('assets/images/cinema_home.jpg'),
+              fit: BoxFit.cover,
+
+            ),
           ),
-        ));
+        )
+    );
   }
 }

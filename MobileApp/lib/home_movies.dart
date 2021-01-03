@@ -93,14 +93,17 @@ class _HomeState extends State<Home> {
           ];
         },
         body: Container(
-          child: Column(
-            children: <Widget>[
-              Divider(height: 200),
-              Text('Cerca tra centinaia di film presenti sulla nostra app',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              Icon(Icons.movie, size: 150, color: Colors.teal)
-            ],
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
+              image: AssetImage('assets/images/cinema_home.jpg'),
+              fit: BoxFit.cover,
+
+            ),
           ),
-        ));
+        )
+    );
   }
 }
