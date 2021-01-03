@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:INGSW_MezMar/models/movie.dart';
+import 'movie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +14,7 @@ class MovieListData {
   int totalPage = 0;
 
   static const API =
-      'https://api.themoviedb.org/3/discover/movie?api_key=6094a309fc93881d4b116756680a382c&language=it-IT&sort_by=popularity.desc&include_adult=false&include_video=false&page=1';
+      'https://api.themoviedb.org/3/discover/movie?api_key=6094a309fc93881d4b116756680a382c&language=it-IT&sort_by=popularity.desc&include_adult=false&include_video=false&page=2';
 
   factory MovieListData.fromJson(Map<String, dynamic> json) {
     var results = json['results'] as List;
@@ -37,7 +37,7 @@ class MovieListData {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load album');
+      throw Exception('Errore durante il caricamento.');
     }
   }
 }

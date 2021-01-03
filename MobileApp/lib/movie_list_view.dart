@@ -37,7 +37,7 @@ class MovieListView extends StatelessWidget {
                 0.0, 50 * (1.0 - animation.value), 0.0),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 16 , right: 16, top: 8, bottom: 16),
+                  left: 16, right: 16, top: 8, bottom: 16),
               child: InkWell(
                 splashColor: Colors.transparent,
                 onTap: () {
@@ -69,10 +69,8 @@ class MovieListView extends StatelessWidget {
                           children: <Widget>[
                             AspectRatio(
                               aspectRatio: 2,
-                              child: CachedNetworkImage(
-                                  imageUrl:
-                                      'https://image.tmdb.org/t/p/original/' +
-                                          movieData.image),
+                              child:
+                                  CachedNetworkImage(imageUrl: movieData.image),
                             ),
                             Container(
                               color: Colors.white,

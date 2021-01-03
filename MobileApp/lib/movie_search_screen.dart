@@ -121,15 +121,15 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
               future: futureMovieData,
               builder: (BuildContext context,
                   AsyncSnapshot<MovieListData> snapshot) {
-                print(snapshot.data.movies);
-                if (!snapshot.hasData) {
-                  return const SizedBox();
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container();
                 } else {
+                  List<Movie> movies = snapshot.data.movies;
                   return ListView.builder(
-                    itemCount: 50,
+                    itemCount: movies.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
-                      final int count = 50;
+                      final int count = movies.length;
                       final Animation<double> animation =
                           Tween<double>(begin: 0.0, end: 1.0).animate(
                               CurvedAnimation(
@@ -140,7 +140,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
 
                       return MovieListView(
                         callback: () {},
-                        movieData: snapshot.data.movies[index],
+                        movieData: movies[index],
                         animation: animation,
                         animationController: animationController,
                       );

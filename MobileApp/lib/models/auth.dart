@@ -34,9 +34,9 @@ class Auth with ChangeNotifier {
   dynamic getJwt() async {
     var response =
         await http.post(API, body: {'email': _email, 'password': _password});
+
     var json = jsonDecode(response.body);
     if (json['success'] == true) {
-      print(json['data']['jwt']);
       return json['data']['jwt'];
     } else {
       _errorMessage = json['message'];
