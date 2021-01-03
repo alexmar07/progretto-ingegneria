@@ -258,12 +258,7 @@ class _LoginScreenState extends State<LoginScreen>
                       });
                     },
                     textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'hatkestays@gmail.com',
-                      fillColor: Colors.teal,
-                      hintStyle: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Quicksand'),
-                    ),
+
                   ),
                 ),
               ],
@@ -319,11 +314,7 @@ class _LoginScreenState extends State<LoginScreen>
                         _logindata.password = str;
                       });
                     },
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '*********',
-                      hintStyle: TextStyle(color: Theme.of(context).accentColor),
-                    ),
+
                   ),
                 ),
               ],
@@ -480,11 +471,7 @@ class _LoginScreenState extends State<LoginScreen>
                    ),
                    cursorColor: Colors.teal,
                    textAlign: TextAlign.left,
-                   decoration: InputDecoration(
-                     border: InputBorder.none,
-                     hintText: 'Giovanni',
-                     hintStyle: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Quicksand'),
-                   ),
+
                    onChanged: (String str){
                      setState(() {
                        _data.name = str;
@@ -545,11 +532,7 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Mazing',
-                      hintStyle: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Quicksand'),
-                    ),
+
                   ),
                 ),
               ],
@@ -605,11 +588,7 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'GiuannMazing',
-                      hintStyle: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Quicksand'),
-                    ),
+
                   ),
                 ),
               ],
@@ -665,11 +644,7 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'hatkestays@gmail.com',
-                      hintStyle: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Quicksand'),
-                    ),
+
                   ),
                 ),
               ],
@@ -726,11 +701,7 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '*********',
-                      hintStyle: TextStyle(color: Theme.of(context).accentColor),
-                    ),
+
                   ),
                 ),
               ],

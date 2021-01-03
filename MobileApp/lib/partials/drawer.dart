@@ -22,7 +22,7 @@ class AppDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Pascal Mazing',
+                        'Username',
                         style: TextStyle(
                             fontFamily: 'poppins-regular',
                             fontSize: 25.0,

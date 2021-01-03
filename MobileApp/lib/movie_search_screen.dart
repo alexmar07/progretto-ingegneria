@@ -217,11 +217,11 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                   FocusScope.of(context).requestFocus(FocusNode());
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(FontAwesomeIcons.search,
-                      size: 20,
-                      color: MovieAppTheme.buildLightTheme().backgroundColor),
-                ),
+                padding: const EdgeInsets.all(16.0),
+                child: Icon(FontAwesomeIcons.search,
+                    size: 20,
+                    color: MovieAppTheme.buildLightTheme().backgroundColor),
+              ),
               ),
             ),
           ),
