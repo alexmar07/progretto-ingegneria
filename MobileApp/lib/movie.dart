@@ -1,33 +1,24 @@
-import 'dart:io';
-
-import 'package:INGSW_MezMar/models/movie_list_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:INGSW_MezMar/write_review.dart';
-import 'dart:convert';
-
-import 'movie_app_theme.dart';
 import 'models/movie.dart';
 
 Color textColor = Colors.black54;
 Color textSecondry = Colors.grey;
 
 class SingleMovie extends StatefulWidget {
-  SingleMovie(this.id);
+  SingleMovie(this.movie);
   var rooms;
-  var id;
+  Movie movie;
   var aminities;
   @override
-  _SingleMovieState createState() => _SingleMovieState(id);
+  _SingleMovieState createState() => _SingleMovieState(movie);
 }
 
 class _SingleMovieState extends State<SingleMovie> {
-  _SingleMovieState(this.id);
+  _SingleMovieState(this.movie);
   var token;
-  var movie;
-  var id;
-
-  Movie movieData;
+  Movie movie;
   @override
   void initState() {
     super.initState();
@@ -96,7 +87,7 @@ class _SingleMovieState extends State<SingleMovie> {
           Container(
             child: Stack(
               children: <Widget>[
-                CachedNetworkImage(imageUrl: movieData.image),
+                CachedNetworkImage(imageUrl: movie.image),
                 IconButton(
                     icon: Icon(
                       Icons.arrow_back,
@@ -119,7 +110,7 @@ class _SingleMovieState extends State<SingleMovie> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          movieData.title,
+                          movie.title,
                           style: TextStyle(
                               fontFamily: 'Quicksand',
                               fontWeight: FontWeight.bold,
@@ -138,7 +129,7 @@ class _SingleMovieState extends State<SingleMovie> {
                               children: <Widget>[
                                 Align(
                                   child: Text(
-                                    'Numero Recensioni: ',
+                                    'Data di rilascio: ',
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: textColor,
@@ -147,7 +138,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Text(
-                                  movieData.rating.toString(),
+                                  movie.year,
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: textColor,
@@ -169,7 +160,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                   ),
                                   alignment: Alignment.centerLeft,
                                 ),
-                                Text(movieData.rating.toString()),
+                                Text(movie.rating.toString()),
                               ],
                             ),
                           ),
@@ -227,7 +218,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                 child: TabBarView(children: [
                                   Container(
                                     padding: EdgeInsets.all(10),
-                                    child: Text(movieData.title),
+                                    child: Text(movie.overview),
                                   ),
                                 ]))
                           ],

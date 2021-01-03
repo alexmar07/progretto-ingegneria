@@ -46,7 +46,7 @@ class MovieListView extends StatelessWidget {
                     context,
                     MaterialPageRoute<dynamic>(
                         builder: (BuildContext context) =>
-                            SingleMovie(movieData.id),
+                            SingleMovie(movieData),
                         fullscreenDialog: true),
                   );
                 },
