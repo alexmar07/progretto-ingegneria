@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'users_search_screen.dart';
-import 'movie_search_screen.dart';
+
 class HomeUsers extends StatefulWidget {
   @override
   _HomeUsersState createState() => _HomeUsersState();
@@ -11,7 +10,6 @@ class _HomeUsersState extends State<HomeUsers> {
   double _width;
   double _height;
   @override
-
   @override
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
@@ -21,13 +19,16 @@ class _HomeUsersState extends State<HomeUsers> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              leading: GestureDetector(child: Icon(Icons.menu),onTap: () =>
-                  Scaffold.of(context).openDrawer(),),
+              leading: GestureDetector(
+                child: Icon(Icons.menu),
+                onTap: () => Scaffold.of(context).openDrawer(),
+              ),
               actions: <Widget>[
-
-                SizedBox(width: 12,)
+                SizedBox(
+                  width: 12,
+                )
               ],
-              expandedHeight: _height/5.5,
+              expandedHeight: _height / 5.5,
               floating: false,
               pinned: true,
               backgroundColor: Colors.teal,
@@ -49,11 +50,11 @@ class _HomeUsersState extends State<HomeUsers> {
               ),
               bottom: PreferredSize(
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 10, right: 10,top:10),
+                    margin: EdgeInsets.only(
+                        bottom: 10, left: 10, right: 10, top: 10),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(40)
-                    ),
+                        borderRadius: BorderRadius.circular(40)),
                     width: _width,
                     //height: _height/15,
                     alignment: Alignment.topCenter,
@@ -63,48 +64,43 @@ class _HomeUsersState extends State<HomeUsers> {
                         Navigator.push<dynamic>(
                           context,
                           MaterialPageRoute<dynamic>(
-                              builder: (BuildContext context) =>UsersSearchScreen(),
+                              builder: (BuildContext context) =>
+                                  UsersSearchScreen(),
                               fullscreenDialog: true),
                         );
                       },
                       cursorColor: Colors.grey,
                       decoration: InputDecoration(
                           contentPadding:
-                          EdgeInsets.only(left: 15.0, top: 0.0,bottom: 0),
-                          prefixIcon: Icon(Icons.search, size: 20,color: Colors.grey,),
-
-                          hintText:"Cerca altri CineMates",hintStyle: TextStyle(fontWeight: FontWeight.w300,fontSize: 14.0,fontFamily: 'poppins-regular'),
+                              EdgeInsets.only(left: 15.0, top: 0.0, bottom: 0),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
+                          hintText: "Cerca altri CineMates",
+                          hintStyle: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 14.0,
+                              fontFamily: 'poppins-regular'),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none
-                          )
-                      ),
-
+                              borderSide: BorderSide.none)),
                     ),
-
                   ),
-                  preferredSize: Size(_width,_height/45)),
+                  preferredSize: Size(_width, _height / 45)),
             ),
           ];
         },
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          image: DecorationImage(
-            colorFilter: new ColorFilter.mode(
-                Colors.black.withOpacity(0.1), BlendMode.dstATop),
-            image: AssetImage('assets/images/friends_cinema.jpg'),
-            fit: BoxFit.cover,
-
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              Divider(height: 200),
+              Text('Cerca altri Cinemates presenti sulla nostra app',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              Icon(Icons.supervised_user_circle, size: 150, color: Colors.teal)
+            ],
           ),
-        ),
-      ),
-    );
+        ));
   }
-
-
-
-
-
 }
-

@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:INGSW_MezMar/forgot_password.dart';
-import 'package:INGSW_MezMar/home_movies.dart';
-import 'package:INGSW_MezMar/welcome.dart';
 import 'package:INGSW_MezMar/welcome_visitor.dart';
 import 'package:provider/provider.dart';
-import 'change_details.dart';
-import 'movie.dart';
 import 'models/auth.dart';
-import 'package:http/http.dart';
 
 class LoginPage extends StatefulWidget {
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   String token;
-  
 
   @override
   void initState() {
-
     super.initState();
     debugPrint(token);
-
   }
 
   _LoginPageState();
   @override
-  Widget build( context) {
+  Widget build(context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: ListView(
@@ -43,16 +33,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-
 class LoginScreen extends StatefulWidget {
- 
   @override
   _LoginScreenState createState() => new _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen>
     with TickerProviderStateMixin {
-
   @override
   void initState() {
     super.initState();
@@ -72,7 +59,6 @@ class _LoginScreenState extends State<LoginScreen>
       ),
       child: new Column(
         children: <Widget>[
-
           Container(
             padding: EdgeInsets.only(top: 350.0),
             child: new Row(
@@ -95,7 +81,6 @@ class _LoginScreenState extends State<LoginScreen>
               ],
             ),
           ),
-
           new Container(
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 150.0),
@@ -107,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen>
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)),
                     color: Colors.white,
-                    borderSide: BorderSide(width: 1,color: Colors.white),
+                    borderSide: BorderSide(width: 1, color: Colors.white),
                     highlightedBorderColor: Colors.black87,
                     onPressed: () => gotoSignup(),
                     child: new Container(
@@ -135,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen>
               ],
             ),
           ),
-
           new Container(
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
@@ -182,14 +166,15 @@ class _LoginScreenState extends State<LoginScreen>
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                     fontSize: 15.0,
-                    fontFamily: 'Quicksand'
-                ),
+                    fontFamily: 'Quicksand'),
                 textAlign: TextAlign.end,
               ),
-              onPressed: () => { Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => WelcomeVisitorScreen()),
-              ),
+              onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WelcomeVisitorScreen()),
+                ),
               },
             ),
           ),
@@ -198,20 +183,19 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-
   _LoginData _logindata = new _LoginData();
-
 
   Widget LoginPage() {
     return new Container(
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: Colors.white,
-
       ),
       child: new ListView(
         children: <Widget>[
-         SizedBox(height: 100,),
+          SizedBox(
+            height: 100,
+          ),
           new Row(
             children: <Widget>[
               new Expanded(
@@ -236,9 +220,7 @@ class _LoginScreenState extends State<LoginScreen>
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                    color: Colors.teal,
-                    width: 0.5,
-                    style: BorderStyle.solid),
+                    color: Colors.teal, width: 0.5, style: BorderStyle.solid),
               ),
             ),
             padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -249,16 +231,13 @@ class _LoginScreenState extends State<LoginScreen>
                 new Expanded(
                   child: TextField(
                     cursorColor: Colors.teal,
-                    style: TextStyle(
-                      color: Colors.teal
-                    ),
-                    onChanged: (String str){
+                    style: TextStyle(color: Colors.teal),
+                    onChanged: (String str) {
                       setState(() {
                         _logindata.email = str;
                       });
                     },
                     textAlign: TextAlign.left,
-
                   ),
                 ),
               ],
@@ -275,11 +254,10 @@ class _LoginScreenState extends State<LoginScreen>
                   child: new Text(
                     "PASSWORD",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand'
-                    ),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                        fontSize: 15.0,
+                        fontFamily: 'Quicksand'),
                   ),
                 ),
               ),
@@ -292,9 +270,7 @@ class _LoginScreenState extends State<LoginScreen>
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                    color: Colors.teal,
-                    width: 0.5,
-                    style: BorderStyle.solid),
+                    color: Colors.teal, width: 0.5, style: BorderStyle.solid),
               ),
             ),
             padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -306,15 +282,12 @@ class _LoginScreenState extends State<LoginScreen>
                   child: TextField(
                     obscureText: true,
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.teal
-                    ),
-                    onChanged: (String str){
+                    style: TextStyle(color: Colors.teal),
+                    onChanged: (String str) {
                       setState(() {
                         _logindata.password = str;
                       });
                     },
-
                   ),
                 ),
               ],
@@ -332,17 +305,17 @@ class _LoginScreenState extends State<LoginScreen>
                   child: new Text(
                     "Password dimenticata?",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand'
-                    ),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                        fontSize: 15.0,
+                        fontFamily: 'Quicksand'),
                     textAlign: TextAlign.end,
                   ),
-                  onPressed: () => { Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ForgotPassword()),
-                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ForgotPassword()),
+                    ),
                   },
                 ),
               ),
@@ -360,22 +333,24 @@ class _LoginScreenState extends State<LoginScreen>
                       borderRadius: new BorderRadius.circular(30.0),
                     ),
                     color: Colors.teal,
-                    onPressed: ()async {
+                    onPressed: () async {
                       Provider.of<Auth>(context).setEmail(_logindata.email);
-                      Provider.of<Auth>(context).setPassword(_logindata.password);
+                      Provider.of<Auth>(context)
+                          .setPassword(_logindata.password);
                       var jwt = await Provider.of<Auth>(context).getJwt();
-                      if ( jwt != false ) {
+                      print(jwt);
+                      if (jwt != false) {
                         Provider.of<Auth>(context).login();
                         Provider.of<Auth>(context).changeToken(jwt);
-                      }
-                      else {
+                      } else {
                         final snackBar = SnackBar(
-                            content: Text(Provider.of<Auth>(context).errorMessage, textAlign: TextAlign.center,),
-
+                          content: Text(
+                            Provider.of<Auth>(context).errorMessage,
+                            textAlign: TextAlign.center,
+                          ),
                         );
                         Scaffold.of(context).showSnackBar(snackBar);
                       }
-
                     },
                     child: new Container(
                       padding: const EdgeInsets.symmetric(
@@ -392,8 +367,7 @@ class _LoginScreenState extends State<LoginScreen>
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: 'Quicksand'
-                              ),
+                                  fontFamily: 'Quicksand'),
                             ),
                           ),
                         ],
@@ -408,11 +382,8 @@ class _LoginScreenState extends State<LoginScreen>
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0),
             alignment: Alignment.center,
-            child: Row(
-
-            ),
+            child: Row(),
           ),
-
         ],
       ),
     );
@@ -428,60 +399,56 @@ class _LoginScreenState extends State<LoginScreen>
       ),
       child: new ListView(
         children: <Widget>[
-         SizedBox(height: 50,),
-         new Row(
-           children: <Widget>[
-             new Expanded(
-               child: new Padding(
-                 padding: const EdgeInsets.only(left: 40.0),
-                 child: new Text(
-                   "NOME",
-                   style: TextStyle(
-                       fontWeight: FontWeight.bold,
-                       color: Colors.teal,
-                       fontSize: 15.0,
-                       fontFamily: 'Quicksand'
-                   ),
-                 ),
-               ),
-             ),
-           ],
-         ),
-         new Container(
-           width: MediaQuery.of(context).size.width,
-           margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
-           alignment: Alignment.center,
-           decoration: BoxDecoration(
-             border: Border(
-               bottom: BorderSide(
-                   color: Colors.teal,
-                   width: 0.5,
-                   style: BorderStyle.solid),
-             ),
-           ),
-           padding: const EdgeInsets.only(left: 0.0, right: 10.0),
-           child: new Row(
-             crossAxisAlignment: CrossAxisAlignment.center,
-             mainAxisAlignment: MainAxisAlignment.start,
-             children: <Widget>[
-               new Expanded(
-                 child: TextField(
-                   style: TextStyle(
-                       color: Colors.teal
-                   ),
-                   cursorColor: Colors.teal,
-                   textAlign: TextAlign.left,
-
-                   onChanged: (String str){
-                     setState(() {
-                       _data.name = str;
-                     });
-                   },
-                 ),
-               ),
-             ],
-           ),
-         ),
+          SizedBox(
+            height: 50,
+          ),
+          new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new Padding(
+                  padding: const EdgeInsets.only(left: 40.0),
+                  child: new Text(
+                    "NOME",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                        fontSize: 15.0,
+                        fontFamily: 'Quicksand'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          new Container(
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                    color: Colors.teal, width: 0.5, style: BorderStyle.solid),
+              ),
+            ),
+            padding: const EdgeInsets.only(left: 0.0, right: 10.0),
+            child: new Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                new Expanded(
+                  child: TextField(
+                    style: TextStyle(color: Colors.teal),
+                    cursorColor: Colors.teal,
+                    textAlign: TextAlign.left,
+                    onChanged: (String str) {
+                      setState(() {
+                        _data.name = str;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
           Divider(
             height: 24.0,
           ),
@@ -496,8 +463,7 @@ class _LoginScreenState extends State<LoginScreen>
                         fontWeight: FontWeight.bold,
                         color: Colors.teal,
                         fontSize: 15.0,
-                        fontFamily: 'Quicksand'
-                    ),
+                        fontFamily: 'Quicksand'),
                   ),
                 ),
               ),
@@ -510,9 +476,7 @@ class _LoginScreenState extends State<LoginScreen>
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                    color: Colors.teal,
-                    width: 0.5,
-                    style: BorderStyle.solid),
+                    color: Colors.teal, width: 0.5, style: BorderStyle.solid),
               ),
             ),
             padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -522,17 +486,14 @@ class _LoginScreenState extends State<LoginScreen>
               children: <Widget>[
                 new Expanded(
                   child: TextField(
-                    onChanged: (String str){
+                    onChanged: (String str) {
                       setState(() {
                         _data.surname = str;
                       });
                     },
-                    style: TextStyle(
-                        color: Colors.teal
-                    ),
+                    style: TextStyle(color: Colors.teal),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-
                   ),
                 ),
               ],
@@ -552,8 +513,7 @@ class _LoginScreenState extends State<LoginScreen>
                         fontWeight: FontWeight.bold,
                         color: Colors.teal,
                         fontSize: 15.0,
-                        fontFamily: 'Quicksand'
-                    ),
+                        fontFamily: 'Quicksand'),
                   ),
                 ),
               ),
@@ -566,9 +526,7 @@ class _LoginScreenState extends State<LoginScreen>
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                    color: Colors.teal,
-                    width: 0.5,
-                    style: BorderStyle.solid),
+                    color: Colors.teal, width: 0.5, style: BorderStyle.solid),
               ),
             ),
             padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -578,25 +536,22 @@ class _LoginScreenState extends State<LoginScreen>
               children: <Widget>[
                 new Expanded(
                   child: TextField(
-                    onChanged: (String str){
+                    onChanged: (String str) {
                       setState(() {
                         _data.surname = str;
                       });
                     },
-                    style: TextStyle(
-                        color: Colors.teal
-                    ),
+                    style: TextStyle(color: Colors.teal),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-
                   ),
                 ),
               ],
             ),
           ),
-         Divider(
-           height: 24.0,
-         ),
+          Divider(
+            height: 24.0,
+          ),
           new Row(
             children: <Widget>[
               new Expanded(
@@ -605,11 +560,10 @@ class _LoginScreenState extends State<LoginScreen>
                   child: new Text(
                     "EMAIL",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand'
-                    ),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                        fontSize: 15.0,
+                        fontFamily: 'Quicksand'),
                   ),
                 ),
               ),
@@ -622,9 +576,7 @@ class _LoginScreenState extends State<LoginScreen>
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                    color: Colors.teal,
-                    width: 0.5,
-                    style: BorderStyle.solid),
+                    color: Colors.teal, width: 0.5, style: BorderStyle.solid),
               ),
             ),
             padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -634,17 +586,14 @@ class _LoginScreenState extends State<LoginScreen>
               children: <Widget>[
                 new Expanded(
                   child: TextField(
-                    onChanged: (String str){
+                    onChanged: (String str) {
                       setState(() {
                         _data.email = str;
                       });
                     },
-                    style: TextStyle(
-                        color: Colors.teal
-                    ),
+                    style: TextStyle(color: Colors.teal),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-
                   ),
                 ),
               ],
@@ -661,11 +610,10 @@ class _LoginScreenState extends State<LoginScreen>
                   child: new Text(
                     "PASSWORD",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand'
-                    ),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                        fontSize: 15.0,
+                        fontFamily: 'Quicksand'),
                   ),
                 ),
               ),
@@ -678,9 +626,7 @@ class _LoginScreenState extends State<LoginScreen>
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                    color: Colors.teal,
-                    width: 0.5,
-                    style: BorderStyle.solid),
+                    color: Colors.teal, width: 0.5, style: BorderStyle.solid),
               ),
             ),
             padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -690,18 +636,15 @@ class _LoginScreenState extends State<LoginScreen>
               children: <Widget>[
                 new Expanded(
                   child: TextField(
-                    onChanged: (String str){
+                    onChanged: (String str) {
                       setState(() {
                         _data.password = str;
                       });
                     },
                     obscureText: true,
-                    style: TextStyle(
-                        color: Colors.teal
-                    ),
+                    style: TextStyle(color: Colors.teal),
                     cursorColor: Colors.teal,
                     textAlign: TextAlign.left,
-
                   ),
                 ),
               ],
@@ -719,11 +662,10 @@ class _LoginScreenState extends State<LoginScreen>
                   child: new Text(
                     "Hai già un account?",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand'
-                    ),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                        fontSize: 15.0,
+                        fontFamily: 'Quicksand'),
                     textAlign: TextAlign.end,
                   ),
                   onPressed: () => gotoLogin(),
@@ -759,8 +701,7 @@ class _LoginScreenState extends State<LoginScreen>
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: 'Quicksand'
-                              ),
+                                  fontFamily: 'Quicksand'),
                             ),
                           ),
                         ],
@@ -794,12 +735,12 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-
-  PageController _controller = new PageController(initialPage: 1, viewportFraction: 1.0);
+  PageController _controller =
+      new PageController(initialPage: 1, viewportFraction: 1.0);
 
   @override
   Widget build(ontext) {
-     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
         statusBarColor: Colors.teal,
         //or set color with: Color(0xFF0000FF)
         statusBarBrightness: Brightness.light));
@@ -824,7 +765,15 @@ class _SignupData {
   String birthDate = '';
   String surname = '';
 
-  _SignupData({this.name,this.surname,this.email,this.address,this.password,this.city,this.province,this.birthDate});
+  _SignupData(
+      {this.name,
+      this.surname,
+      this.email,
+      this.address,
+      this.password,
+      this.city,
+      this.province,
+      this.birthDate});
 
   factory _SignupData.fromJson(Map<String, dynamic> json) {
     return _SignupData(
@@ -853,7 +802,7 @@ class _LoginData {
   String email = '';
   String password = '';
 
-  _LoginData({this.email,this.password});
+  _LoginData({this.email, this.password});
 
   factory _LoginData.fromJson(Map<String, dynamic> json) {
     return _LoginData(

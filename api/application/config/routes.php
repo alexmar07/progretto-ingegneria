@@ -53,8 +53,9 @@ $route['default_controller'] = 'tests/test/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// Autentificazione
 $route['login']   =   'auth/auth_users/login';
 
-// Gestione richiesta 
+// Gestione richieste di collegamente
 $route['users/request']         = 'users/users/create_link';
 $route['users/request']         = 'users/users/create_link';

@@ -5,20 +5,22 @@ class Movie {
   String year;
   double rating;
 
+  static const String IMAGE_PATH = 'https://image.tmdb.org/t/p/original/';
+
   Movie({
     this.id = 0,
     this.title = '',
     this.image = '',
     this.year = '',
-    this.rating = 0.0,
+    this.rating = 0.00,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return new Movie(
         id: json['id'],
         title: json['title'],
-        image: json['backdrop_path'],
+        image: IMAGE_PATH + json['backdrop_path'],
         year: json['release_year'],
-        rating: json['vote_averange']);
+        rating: (json['vote_average']).toDouble());
   }
 }
