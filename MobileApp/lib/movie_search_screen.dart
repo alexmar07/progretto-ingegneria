@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -122,7 +123,11 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
               builder: (BuildContext context,
                   AsyncSnapshot<MovieListData> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Container();
+                  return Container(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 } else {
                   List<Movie> movies = snapshot.data.movies;
                   return ListView.builder(
@@ -217,11 +222,11 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                   FocusScope.of(context).requestFocus(FocusNode());
                 },
                 child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Icon(FontAwesomeIcons.search,
-                    size: 20,
-                    color: MovieAppTheme.buildLightTheme().backgroundColor),
-              ),
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(FontAwesomeIcons.search,
+                      size: 20,
+                      color: MovieAppTheme.buildLightTheme().backgroundColor),
+                ),
               ),
             ),
           ),
