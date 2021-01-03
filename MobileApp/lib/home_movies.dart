@@ -75,7 +75,6 @@ class _HomeState extends State<Home> {
                           contentPadding:
                           EdgeInsets.only(left: 15.0, top: 0.0,bottom: 0),
                           prefixIcon: Icon(Icons.search, size: 20,color: Colors.grey,),
-
                           hintText:"Cerca un film  ",hintStyle: TextStyle(fontWeight: FontWeight.w300,fontSize: 14.0,fontFamily: 'poppins-regular'),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -92,16 +91,17 @@ class _HomeState extends State<Home> {
           ];
         },
         body: Container(
-          child: Column(
-            children: <Widget>[
-              Divider(height: 200),
-              Text('Cerca tra centinaia di film presenti sulla nostra app',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16) ),
-              Icon(Icons.movie, size: 150, color: Colors.teal)
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            image: DecorationImage(
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
+              image: AssetImage('assets/images/cinema_home.jpg'),
+              fit: BoxFit.cover,
 
-
-            ],
+            ),
           ),
-        )
+        ),
     );
   }
 
