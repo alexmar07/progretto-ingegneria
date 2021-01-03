@@ -2,7 +2,7 @@ import 'package:INGSW_MezMar/home_users.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'home.dart';
+import 'home_movies.dart';
 import 'notifications.dart';
 import 'saved.dart';
 import 'to_be_seen.dart';

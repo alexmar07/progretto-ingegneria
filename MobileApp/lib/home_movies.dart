@@ -50,6 +50,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               bottom: PreferredSize(
+
                   child: Container(
                     margin: EdgeInsets.only(bottom: 10, left: 10, right: 10,top:10),
                     decoration: BoxDecoration(
@@ -85,13 +86,17 @@ class _HomeState extends State<Home> {
                     ),
 
                   ),
+
                   preferredSize: Size(_width,_height/45)),
             ),
           ];
         },
-        body: SingleChildScrollView(
+        body: Container(
           child: Column(
             children: <Widget>[
+              Divider(height: 200),
+              Text('Cerca tra centinaia di film presenti sulla nostra app',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16) ),
+              Icon(Icons.movie, size: 150, color: Colors.teal)
 
 
             ],

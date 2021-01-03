@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:INGSW_MezMar/forgot_password.dart';
-import 'package:INGSW_MezMar/home.dart';
+import 'package:INGSW_MezMar/home_movies.dart';
 import 'package:INGSW_MezMar/welcome.dart';
 import 'package:INGSW_MezMar/welcome_visitor.dart';
 import 'package:provider/provider.dart';

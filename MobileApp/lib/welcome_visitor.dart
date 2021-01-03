@@ -4,7 +4,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:INGSW_MezMar/change_details.dart';
 import 'package:INGSW_MezMar/home_visitor.dart';
 import 'package:INGSW_MezMar/partials/drawer_visitor.dart';
-import 'home.dart';
+import 'home_movies.dart';
 
 import 'home_visitor.dart';
 import 'partials/drawer.dart';
