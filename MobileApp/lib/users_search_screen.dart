@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'models/users_list_data.dart';
-import 'movie_app_theme.dart';
+
 import 'users_list_view.dart';
 
 
@@ -42,9 +42,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: MovieAppTheme.buildLightTheme(),
-      child: Container(
+    return Container(
         child: Scaffold(
           body: Stack(
             children: <Widget>[
@@ -80,8 +78,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
                           ];
                         },
                         body: Container(
-                          color:
-                          MovieAppTheme.buildLightTheme().backgroundColor,
+                          color: Colors.white,
                           child: ListView.builder(
                             itemCount: usersList.length,
                             padding: const EdgeInsets.only(top: 8),
@@ -114,14 +111,13 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
             ],
           ),
         ),
-      ),
     );
   }
 
   Widget getListUI() {
     return Container(
       decoration: BoxDecoration(
-        color: MovieAppTheme.buildLightTheme().backgroundColor,
+        color: Colors.white,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -207,7 +203,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
               padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: MovieAppTheme.buildLightTheme().backgroundColor,
+                  color: Colors.white,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(38.0),
                   ),
@@ -226,7 +222,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
                     style: const TextStyle(
                       fontSize: 18,
                     ),
-                    cursorColor: MovieAppTheme.buildLightTheme().primaryColor,
+                    cursorColor: Colors.teal,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Cerca',
@@ -238,7 +234,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
           ),
           Container(
             decoration: BoxDecoration(
-              color: MovieAppTheme.buildLightTheme().primaryColor,
+              color: Colors.teal,
               borderRadius: const BorderRadius.all(
                 Radius.circular(38.0),
               ),
@@ -262,7 +258,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
                   padding: const EdgeInsets.all(16.0),
                   child: Icon(FontAwesomeIcons.search,
                       size: 20,
-                      color: MovieAppTheme.buildLightTheme().backgroundColor),
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -279,7 +275,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen>
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: MovieAppTheme.buildLightTheme().backgroundColor,
+        color: Colors.white,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),

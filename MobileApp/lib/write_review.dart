@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'movie_app_theme.dart';
+
 import 'package:http/http.dart' as http;
 
 class WriteReview extends StatefulWidget {
@@ -19,7 +19,7 @@ class  _WriteReviewState extends State<WriteReview> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: MovieAppTheme.buildLightTheme().backgroundColor,
+      color: Colors.white,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -54,7 +54,7 @@ class  _WriteReviewState extends State<WriteReview> {
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: MovieAppTheme.buildLightTheme().primaryColor,
+                  color: Colors.teal,
                   borderRadius: const BorderRadius.all(Radius.circular(24.0)),
                   boxShadow: <BoxShadow>[
                     BoxShadow(

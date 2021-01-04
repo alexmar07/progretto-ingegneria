@@ -1,9 +1,8 @@
-import 'dart:io';
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'filters_screen.dart';
-import 'movie_app_theme.dart';
 import 'movie_list_view.dart';
 import 'models/movie_list_data.dart';
 import 'models/movie.dart';
@@ -49,9 +48,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: MovieAppTheme.buildLightTheme(),
-      child: Container(
+    return  Container(
         child: Scaffold(
           body: Stack(
             children: <Widget>[
@@ -99,14 +96,13 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
             ],
           ),
         ),
-      ),
     );
   }
 
   Widget getListUI() {
     return Container(
       decoration: BoxDecoration(
-        color: MovieAppTheme.buildLightTheme().backgroundColor,
+        color: Colors.white,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -170,7 +166,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
               padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: MovieAppTheme.buildLightTheme().backgroundColor,
+                  color: Colors.white,
                   borderRadius: const BorderRadius.all(
                     Radius.circular(38.0),
                   ),
@@ -189,7 +185,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                     style: const TextStyle(
                       fontSize: 18,
                     ),
-                    cursorColor: MovieAppTheme.buildLightTheme().primaryColor,
+                    cursorColor: Colors.teal,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Cerca',
@@ -201,7 +197,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
           ),
           Container(
             decoration: BoxDecoration(
-              color: MovieAppTheme.buildLightTheme().primaryColor,
+              color: Colors.teal,
               borderRadius: const BorderRadius.all(
                 Radius.circular(38.0),
               ),
@@ -225,7 +221,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                   padding: const EdgeInsets.all(16.0),
                   child: Icon(FontAwesomeIcons.search,
                       size: 20,
-                      color: MovieAppTheme.buildLightTheme().backgroundColor),
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -245,7 +241,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
           child: Container(
             height: 24,
             decoration: BoxDecoration(
-              color: MovieAppTheme.buildLightTheme().backgroundColor,
+              color: Colors.white,
               boxShadow: <BoxShadow>[
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
@@ -256,7 +252,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
           ),
         ),
         Container(
-          color: MovieAppTheme.buildLightTheme().backgroundColor,
+          color: Colors.white,
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
@@ -295,8 +291,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(Icons.sort,
-                                color: MovieAppTheme.buildLightTheme()
-                                    .primaryColor),
+                                color: Colors.teal),
                           ),
                         ],
                       ),
@@ -322,7 +317,7 @@ class _MovieSearchScreenState extends State<MovieSearchScreen>
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: MovieAppTheme.buildLightTheme().backgroundColor,
+        color: Colors.white,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),

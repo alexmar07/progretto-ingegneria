@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:INGSW_MezMar/write_review.dart';
-import 'dart:convert';
 
-import 'movie_app_theme.dart';
 Color textColor = Colors.black54;
 Color textSecondry = Colors.grey;
 
