@@ -334,6 +334,7 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                     color: Colors.teal,
                     onPressed: () async {
+                      FocusScope.of(context).unfocus();
                       Provider.of<Auth>(context).setEmail(_logindata.email);
                       Provider.of<Auth>(context)
                           .setPassword(_logindata.password);
@@ -344,9 +345,12 @@ class _LoginScreenState extends State<LoginScreen>
                         Provider.of<Auth>(context).changeToken(jwt);
                       } else {
                         final snackBar = SnackBar(
-                          content: Text(
+                          content: Container(
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              child: Text(
                             Provider.of<Auth>(context).errorMessage,
                             textAlign: TextAlign.center,
+                             )
                           ),
                         );
                         Scaffold.of(context).showSnackBar(snackBar);
@@ -369,6 +373,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Quicksand'),
                             ),
+
                           ),
                         ],
                       ),
