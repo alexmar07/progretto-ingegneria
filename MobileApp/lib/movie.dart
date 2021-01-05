@@ -198,7 +198,7 @@ class _SingleMovieState extends State<SingleMovie> {
                       ),
                     ),
                     DefaultTabController(
-                        length: 1,
+                        length: 2,
                         initialIndex: 0,
                         child: Column(
                           children: <Widget>[
@@ -209,8 +209,11 @@ class _SingleMovieState extends State<SingleMovie> {
                               isScrollable: true,
                               tabs: [
                                 Tab(
-                                  text: 'RECENSIONI',
+                                  text: 'TRAMA',
                                 ),
+                                Tab(
+                                  text: 'RECENSIONI',
+                                )
                               ],
                             ),
                             Container(
@@ -219,6 +222,10 @@ class _SingleMovieState extends State<SingleMovie> {
                                   Container(
                                     padding: EdgeInsets.all(10),
                                     child: Text(movie.overview),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text('QUI CI VANNO LE RECENSIONI'),
                                   ),
                                 ]))
                           ],
