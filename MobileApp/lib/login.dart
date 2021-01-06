@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String token;
 
+
   @override
   void initState() {
     super.initState();
@@ -244,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
           Divider(
-            height: 24.0,
+            height: 22.0,
           ),
           new Row(
             children: <Widget>[
@@ -294,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
           Divider(
-            height: 24.0,
+            height: 22.0,
           ),
           new Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -396,8 +397,11 @@ class _LoginScreenState extends State<LoginScreen>
 
   _SignupData _data = new _SignupData();
 
+  bool _checked = false;
   Widget SignupPage() {
+
     return new Container(
+
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -455,7 +459,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
           Divider(
-            height: 24.0,
+            height: 22.0,
           ),
           new Row(
             children: <Widget>[
@@ -505,7 +509,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
           Divider(
-            height: 24.0,
+            height: 22.0,
           ),
           new Row(
             children: <Widget>[
@@ -555,7 +559,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
           Divider(
-            height: 24.0,
+            height: 22.0,
           ),
           new Row(
             children: <Widget>[
@@ -605,7 +609,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
           Divider(
-            height: 24.0,
+            height: 22.0,
           ),
           new Row(
             children: <Widget>[
@@ -655,32 +659,33 @@ class _LoginScreenState extends State<LoginScreen>
               ],
             ),
           ),
-          Divider(
-            height: 24.0,
-          ),
+
+
           new Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: new FlatButton(
-                  child: new Text(
-                    "Hai già un account?",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.teal,
-                        fontSize: 15.0,
-                        fontFamily: 'Quicksand'),
-                    textAlign: TextAlign.end,
-                  ),
-                  onPressed: () => gotoLogin(),
+              new Expanded(
+                child: new Padding(
+                    padding: const EdgeInsets.only(left: 12),
+                    child: new CheckboxListTile(
+                      title: Text("Iscriviti alla newsletter", style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold), ),
+                      activeColor: Colors.teal,
+                      value: _checked,
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged:(bool value){
+                        setState(() {
+                          _checked = value;
+                        });
+                      },
+                    )
                 ),
               ),
             ],
           ),
+          Divider(height: 20),
           new Container(
             width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
+            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 5),
             alignment: Alignment.center,
             child: new Row(
               children: <Widget>[
@@ -716,6 +721,27 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
               ],
             ),
+          ),
+          Divider(height: 10),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(),
+                child: new FlatButton(
+                  child: new Text(
+                    "Hai già un account?",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                        fontSize: 15.0,
+                        fontFamily: 'Quicksand'),
+                    textAlign: TextAlign.end,
+                  ),
+                  onPressed: () => gotoLogin(),
+                ),
+              ),
+            ],
           ),
         ],
       ),
