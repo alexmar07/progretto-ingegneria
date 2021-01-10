@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:INGSW_MezMar/data/api_movie.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:INGSW_MezMar/write_review.dart';
@@ -36,27 +39,6 @@ class _SingleMovieState extends State<SingleMovie> {
     return Row(children: widgets);
   }
 
-  bool ames;
-
-//  Widget buildcheck(aminities) {
-//    List<Widget> widgets = List<Widget>();
-//    aminities = aminities.split(",");
-//    //print(aminities);
-//    print(aminities + ' lev 3 BUILD');
-//
-//    for (int i=0; i < aminities.length ;i++){
-//      widgets.add (
-//        Row(
-//          children: <Widget>[
-//            Text(aminities[i]),
-//
-//          ],
-//        )
-//      );
-//    }
-//    return Column(children: widgets);
-//  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +69,7 @@ class _SingleMovieState extends State<SingleMovie> {
           Container(
             child: Stack(
               children: <Widget>[
-                CachedNetworkImage(imageUrl: movie.image),
+                CachedNetworkImage(imageUrl: movie.backdropPath),
                 IconButton(
                     icon: Icon(
                       Icons.arrow_back,
@@ -138,7 +120,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Text(
-                                  movie.year,
+                                  movie.releaseDate,
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: textColor,
@@ -160,7 +142,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                   ),
                                   alignment: Alignment.centerLeft,
                                 ),
-                                Text(movie.rating.toString()),
+                                Text(movie.voteAverage.toString()),
                               ],
                             ),
                           ),
@@ -173,7 +155,18 @@ class _SingleMovieState extends State<SingleMovie> {
                                         Icons.favorite,
                                         color: Colors.redAccent,
                                       ),
-                                      onPressed: () {}),
+                                      onPressed: () async {
+                                        String message = await MovieRepository()
+                                            .addMovieList(movie.id, 'prefer');
+
+                                        return showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                content: Text(message),
+                                              );
+                                            });
+                                      }),
                                   alignment: Alignment.centerLeft,
                                 ),
                               ],
@@ -209,10 +202,10 @@ class _SingleMovieState extends State<SingleMovie> {
                               isScrollable: true,
                               tabs: [
                                 Tab(
-                                  text: 'TRAMA',
+                                  text: 'Panoramica',
                                 ),
                                 Tab(
-                                  text: 'RECENSIONI',
+                                  text: 'Recensioni',
                                 )
                               ],
                             ),
@@ -221,7 +214,9 @@ class _SingleMovieState extends State<SingleMovie> {
                                 child: TabBarView(children: [
                                   Container(
                                     padding: EdgeInsets.all(10),
-                                    child: Text(movie.overview),
+                                    child: Text(movie.overview.isEmpty
+                                        ? 'Panoramica non disponibile.'
+                                        : movie.overview),
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(10),

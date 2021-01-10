@@ -48,7 +48,6 @@ class Auth with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('token');
     _state = false;
-    print('Logout');
     notifyListeners();
   }
 }

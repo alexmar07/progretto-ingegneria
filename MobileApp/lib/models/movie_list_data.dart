@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:INGSW_MezMar/config/config.dart';
 import 'movie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -13,9 +14,6 @@ class MovieListData {
   int totalResult = 0;
   int totalPage = 0;
 
-  static const API =
-      'https://api.themoviedb.org/3/discover/movie?api_key=6094a309fc93881d4b116756680a382c&language=it-IT&sort_by=popularity.desc&include_adult=false&include_video=false&page=2';
-
   factory MovieListData.fromJson(Map<String, dynamic> json) {
     var results = json['results'] as List;
     List<Movie> movies = results.map((i) => Movie.fromJson(i)).toList();
@@ -26,8 +24,15 @@ class MovieListData {
         movies: movies);
   }
 
-  Future<MovieListData> fetchMovieListData() async {
-    final response = await http.get(API);
+  Future<MovieListData> fetchMovieListData(int page) async {
+    String url = Config.apiTMDB +
+        'discover/movie?api_key=' +
+        Config.apiKeyTMDB +
+        '&language=' +
+        Config.language +
+        '&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page';
+    print(url);
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

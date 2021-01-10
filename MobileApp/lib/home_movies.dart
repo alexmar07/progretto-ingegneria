@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'movie_search_screen.dart';
+import 'movie_list_screen.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute<dynamic>(
                               builder: (BuildContext context) =>
-                                  MovieSearchScreen(),
+                                  MovieListScreen(),
                               fullscreenDialog: true),
                         );
                       },
@@ -100,10 +100,8 @@ class _HomeState extends State<Home> {
                   Colors.black.withOpacity(0.1), BlendMode.dstATop),
               image: AssetImage('assets/images/cinema_home.jpg'),
               fit: BoxFit.cover,
-
             ),
           ),
-        )
-    );
+        ));
   }
 }

@@ -340,7 +340,6 @@ class _LoginScreenState extends State<LoginScreen>
                       Provider.of<Auth>(context)
                           .setPassword(_logindata.password);
                       var jwt = await Provider.of<Auth>(context).getJwt();
-                      print(jwt);
                       if (jwt != false) {
                         Provider.of<Auth>(context).login();
                         Provider.of<Auth>(context).changeToken(jwt);
@@ -349,10 +348,9 @@ class _LoginScreenState extends State<LoginScreen>
                           content: Container(
                               margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: Text(
-                            Provider.of<Auth>(context).errorMessage,
-                            textAlign: TextAlign.center,
-                             )
-                          ),
+                                Provider.of<Auth>(context).errorMessage,
+                                textAlign: TextAlign.center,
+                              )),
                         );
                         Scaffold.of(context).showSnackBar(snackBar);
                       }
@@ -374,7 +372,6 @@ class _LoginScreenState extends State<LoginScreen>
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Quicksand'),
                             ),
-
                           ),
                         ],
                       ),
