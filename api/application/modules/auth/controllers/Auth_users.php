@@ -54,7 +54,7 @@ class Auth_users extends RestController {
             $this->response([
                 'success'   =>  FALSE,
                 'message'   =>  $this->validation->get_error_message()
-            ]);
+            ],400);
         }
             
         // Provo ad eseguire il login
@@ -80,14 +80,14 @@ class Auth_users extends RestController {
                 'data'      =>  [
                     'jwt'   => AUTHORIZATION::generateToken($token)
                 ]
-            ]);
+            ],200);
         }
         else {
             
             $this->response([
                 'success'   =>  FALSE,
                 'message'   =>  'Utente e/o password errate'
-            ]);
+            ], 400);
         }  
     }
 }

@@ -52,10 +52,10 @@ class Movies_list extends Core_Controller {
         ]);
         
         if ( $id != 0 ) {
-            $this->response(json(TRUE,'Film aggiunto alla lista',['item_id' => $id]));
+            $this->response(json(TRUE,'Film aggiunto alla lista',['item_id' => $id]), 200);
         }
 
-        $this->response(json(FALSE,'Errore durante l\'aggiunta del film'));
+        $this->response(json(FALSE,'Errore durante l\'aggiunta del film'), 400);
 
     }
 
