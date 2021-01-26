@@ -18,7 +18,7 @@ jobs:
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: '-rltgoDzvO --exclude=".[!.]*"'
-          SOURCE: "/api"
+          SOURCE: "/"
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USER }}
           TARGET: ${{ secrets.TARGET }}
