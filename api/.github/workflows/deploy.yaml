@@ -11,8 +11,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '13.x'
-    - name: Install Php vendors
-      run: composer install
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
