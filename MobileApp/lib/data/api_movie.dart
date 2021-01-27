@@ -36,6 +36,7 @@ class MovieRepository {
       'type': type
     };
 
+    print(Config.apiUrl + '/list/add');
     var body = json.encode(data);
 
     // Future<http.Response> response = http.post({url: ''});

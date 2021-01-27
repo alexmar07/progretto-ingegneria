@@ -68,23 +68,39 @@ class Movies_list extends Core_Controller {
      */
     public function list_get () {
 
-        $config = $this->load->config('movies/api',TRUE);
-
         $data = $this->main_m->gets([
             'user_id'   =>  $this->jwt->id,
             'type'      =>  $this->get('type')
         ]);
 
-    
         $results = [];
         
-        
-        $client = $this->create_client();
+        $status = FALSE;
 
-        foreach ( $data as $d ) {   
-            $movie = $client->getMoviesApi()->getMovie($d->movie_id, ['language' => 'it']);
-            print_r($movie);die;
+        $client = $this->create_client();
+        
+        if ( ! empty($data) ) {
+
+            foreach ( $data as $d ) {   
+                
+                $movie = $client->getMoviesApi()->getMovie($d->movie_id, ['language' => 'it']);
+                
+                $results[] = [
+                    'id'                =>  $movie['id'],
+                    'title'             =>  $movie['title'],
+                    'vote_average'      =>  $movie['vote_average'],
+                    'poster_path'       =>  $movie['poster_path'],
+                    'popularity'        =>  $movie['popularity'],
+                    'original_title'    =>  $movie['original_title'],
+                    'overview'          =>  $movie['overview'],
+                    'release_date'      =>  $movie['release_date'],
+                ];
+            }
+
+            $status = TRUE;
         }
+       
+        $this->response(json($status, 'Lista film', $results));
 
     }
     
