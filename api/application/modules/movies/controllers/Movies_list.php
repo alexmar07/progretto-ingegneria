@@ -100,7 +100,7 @@ class Movies_list extends Core_Controller {
             $status = TRUE;
         }
        
-        $this->response(json($status, 'Lista film', $results));
+        $this->response(json($status, 'Lista film', $results),200);
 
     }
     
