@@ -4,5 +4,5 @@ class Config {
   static String language = 'it-IT';
   static String imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
-  static String apiUrl = 'http://appprogetto.altervista.org/index.php';
+  static String apiUrl = 'http://alessandro.samagtech.dev';
 }

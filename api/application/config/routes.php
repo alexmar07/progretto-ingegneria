@@ -58,4 +58,7 @@ $route['login']   =   'auth/auth_users/login';
 
 // Gestione richieste di collegamente
 $route['users/request']         = 'users/users/create_link';
-$route['users/request']         = 'users/users/create_link';
+
+
+$route['list/add']              = 'movies/movies_list/add';
+$route['list']                  = 'movies/movies_list/list';
