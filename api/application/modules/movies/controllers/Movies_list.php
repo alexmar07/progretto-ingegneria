@@ -75,7 +75,8 @@ class Movies_list extends Core_Controller {
 
         $results = [];
         
-        $status = FALSE;
+        $status     = FALSE;
+        $message    = 'Non ci sono film';
 
         $client = $this->create_client();
         
@@ -97,10 +98,12 @@ class Movies_list extends Core_Controller {
                 ];
             }
 
-            $status = TRUE;
+            $status     = TRUE;
+            $message    = 'Lista film';
+
         }
        
-        $this->response(json($status, 'Lista film', $results),200);
+        $this->response(json($status, $message, $results),200);
 
     }
     
