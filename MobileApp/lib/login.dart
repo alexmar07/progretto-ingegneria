@@ -13,7 +13,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String token;
 
-
   @override
   void initState() {
     super.initState();
@@ -396,9 +395,7 @@ class _LoginScreenState extends State<LoginScreen>
 
   bool _checked = false;
   Widget SignupPage() {
-
     return new Container(
-
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -656,8 +653,6 @@ class _LoginScreenState extends State<LoginScreen>
               ],
             ),
           ),
-
-
           new Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -665,17 +660,20 @@ class _LoginScreenState extends State<LoginScreen>
                 child: new Padding(
                     padding: const EdgeInsets.only(left: 12),
                     child: new CheckboxListTile(
-                      title: Text("Iscriviti alla newsletter", style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold), ),
+                      title: Text(
+                        "Iscriviti alla newsletter",
+                        style: TextStyle(
+                            color: Colors.teal, fontWeight: FontWeight.bold),
+                      ),
                       activeColor: Colors.teal,
                       value: _checked,
                       controlAffinity: ListTileControlAffinity.leading,
-                      onChanged:(bool value){
+                      onChanged: (bool value) {
                         setState(() {
                           _checked = value;
                         });
                       },
-                    )
-                ),
+                    )),
               ),
             ],
           ),

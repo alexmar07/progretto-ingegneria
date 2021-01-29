@@ -1,46 +1,92 @@
+import 'package:INGSW_MezMar/data/api_movie.dart';
+import 'package:INGSW_MezMar/models/movie_list_prefer_to_see.dart';
 import 'package:flutter/material.dart';
 import 'models/tabs.dart';
 import 'package:provider/provider.dart';
-class ToBeSeen extends StatefulWidget {
+import 'package:INGSW_MezMar/models/movie.dart';
+
+class ToSee extends StatefulWidget {
   @override
-  _ToBeSeenState createState() => _ToBeSeenState();
+  _ToSeeState createState() => _ToSeeState();
 }
 
-class _ToBeSeenState extends State<ToBeSeen> {
+class _ToSeeState extends State<ToSee> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(child: Icon(Icons.arrow_back),onTap: (){
-          Provider.of<Tabs>(context).changeIndex(0);
-        },),
-        title: Text('Lista di film da vedere',style: TextStyle(fontFamily: 'poppins-regular',fontWeight: FontWeight.w500),),
+        leading: GestureDetector(
+          child: Icon(Icons.arrow_back),
+          onTap: () {
+            Provider.of<Tabs>(context).changeIndex(0);
+          },
+        ),
+        title: Text(
+          'Lista di film preferiti',
+          style: TextStyle(
+              fontFamily: 'poppins-regular', fontWeight: FontWeight.w500),
+        ),
       ),
-      body: ListView(
-        children: <Widget>[
-          itemCard('FILM','assets/images/joker.jpg',false),
-          itemCard('FILM','assets/images/miglio.jpg',false),
-        ],
+      body: FutureBuilder(
+        future: MovieRepository().getMyMovieList('to_see'),
+        builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+          if (snapshot.data == null) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return ToSeeListView(movies: snapshot.data);
+          }
+        },
       ),
     );
   }
 }
 
+class ToSeeListView extends StatefulWidget {
+  final MovieListPreferToSee movies;
 
+  ToSeeListView({this.movies, Key key}) : super(key: key);
 
+  @override
+  _ToSeeListViewState createState() => _ToSeeListViewState();
+}
 
-Widget itemCard(String title, String imgPath, bool isFavorite) {
+class _ToSeeListViewState extends State<ToSeeListView> {
+  List<Movie> movie;
+
+  @override
+  void initState() {
+    movie = widget.movies.movies;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
+      child: ListView.builder(
+        itemCount: movie.length,
+        itemBuilder: (BuildContext ctx, int i) {
+          return itemCard(movie[i]);
+        },
+      ),
+    );
+  }
+}
+
+Widget itemCard(Movie movie) {
   return Padding(
     padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
     child: Container(
-
       height: 120.0,
       width: double.infinity,
       //color: Colors.white,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white
-      ),
+          color: Colors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -50,21 +96,22 @@ Widget itemCard(String title, String imgPath, bool isFavorite) {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 image: DecorationImage(
-
-                    image: AssetImage(imgPath), fit: BoxFit.cover)),
+                    image: NetworkImage(movie.backdropPath),
+                    fit: BoxFit.cover)),
           ),
           SizedBox(width: 4.0),
-
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    title,
+                    movie.title,
                     style: TextStyle(
                         fontFamily: 'Quicksand',
                         fontSize: 17.0,
@@ -75,18 +122,7 @@ Widget itemCard(String title, String imgPath, bool isFavorite) {
                   Container(
                     width: 175.0,
                     child: Text(
-                      'Genere',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontFamily: 'Quicksand',
-                          color: Colors.grey,
-                          fontSize: 12.0),
-                    ),
-                  ),
-                  Container(
-                    width: 175.0,
-                    child: Text(
-                      'Anno di uscita',
+                      'Anno di uscita ' + movie.releaseDate,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           fontFamily: 'Quicksand',
@@ -96,32 +132,30 @@ Widget itemCard(String title, String imgPath, bool isFavorite) {
                   ),
                 ],
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-
                   Container(
                     height: 25.0,
                     width: 80.0,
                     child: Text(
-                      '0.0',
+                      movie.voteAverage.toString(),
                       style: TextStyle(
                           fontSize: 19.0,
                           color: Colors.orangeAccent,
                           fontFamily: 'Quicksand',
                           fontWeight: FontWeight.bold),
-
                     ),
                   ),
                   SizedBox(width: 55.0),
                   Container(
                     child: FlatButton(
                       color: Colors.redAccent,
-                      onPressed: (){},
+                      onPressed: () {},
                       textColor: Colors.white,
-                      child: Icon(Icons.remove_red_eye),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                      child: Icon(Icons.favorite_border),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0)),
                     ),
                   )
                 ],

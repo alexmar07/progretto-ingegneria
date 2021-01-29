@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:INGSW_MezMar/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,8 +13,6 @@ class Auth with ChangeNotifier {
   String _password;
   String _errorMessage;
   String get errorMessage => _errorMessage;
-
-  static const API = 'http://appprogetto.altervista.org/index.php/login';
 
   void setEmail(email) => _email = email;
   void setPassword(password) => _password = password;
@@ -32,8 +30,8 @@ class Auth with ChangeNotifier {
   }
 
   dynamic getJwt() async {
-    var response =
-        await http.post(API, body: {'email': _email, 'password': _password});
+    var response = await http.post(Config.apiUrl + '/login',
+        body: {'email': _email, 'password': _password});
 
     var json = jsonDecode(response.body);
     if (json['success'] == true) {

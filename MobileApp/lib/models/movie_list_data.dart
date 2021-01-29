@@ -31,7 +31,7 @@ class MovieListData {
         '&language=' +
         Config.language +
         '&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page';
-    print(url);
+
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

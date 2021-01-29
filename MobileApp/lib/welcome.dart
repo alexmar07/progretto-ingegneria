@@ -9,6 +9,7 @@ import 'to_be_seen.dart';
 import 'partials/drawer.dart';
 import 'package:provider/provider.dart';
 import 'models/tabs.dart';
+
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -17,31 +18,22 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   double _width;
   double _height;
-  Widget screen(){
-    if(Provider.of<Tabs>(context).currentIndex == 0) {
+  Widget screen() {
+    if (Provider.of<Tabs>(context).currentIndex == 0) {
       return Home();
-    }
-    else if(Provider.of<Tabs>(context).currentIndex== 1) {
-      return ToBeSeen();
-    }
-    else if(Provider.of<Tabs>(context).currentIndex == 2) {
+    } else if (Provider.of<Tabs>(context).currentIndex == 1) {
+      return ToSee();
+    } else if (Provider.of<Tabs>(context).currentIndex == 2) {
       return Notifications();
-    }
-    else if(Provider.of<Tabs>(context).currentIndex == 3) {
+    } else if (Provider.of<Tabs>(context).currentIndex == 3) {
       return Saved();
-    }
-
-    else if(Provider.of<Tabs>(context).currentIndex == 4) {
+    } else if (Provider.of<Tabs>(context).currentIndex == 4) {
       return HomeUsers();
     }
-
-
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
         statusBarColor: Colors.teal,
         //or set color with: Color(0xFF0000FF)
@@ -62,36 +54,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               icon: Icon(Icons.movie),
               title: Text('FILM'),
               activeColor: Colors.teal,
-              inactiveColor: Colors.black54
-          ),
+              inactiveColor: Colors.black54),
           BottomNavyBarItem(
               icon: Icon(Icons.remove_red_eye),
               title: Text('DA VEDERE'),
               activeColor: Colors.teal,
-              inactiveColor: Colors.black54
-          ),
+              inactiveColor: Colors.black54),
           BottomNavyBarItem(
               icon: Icon(Icons.notifications),
               title: Text('NOTIFICHE'),
               activeColor: Colors.teal,
-              inactiveColor: Colors.black54
-          ),
+              inactiveColor: Colors.black54),
           BottomNavyBarItem(
               icon: Icon(Icons.favorite_border),
               title: Text('PREFERITI'),
               activeColor: Colors.teal,
-              inactiveColor: Colors.black54
-          ),
+              inactiveColor: Colors.black54),
           BottomNavyBarItem(
               icon: Icon(Icons.supervised_user_circle),
               title: Text('UTENTI'),
               activeColor: Colors.teal,
-              inactiveColor: Colors.black54
-          ),
-
+              inactiveColor: Colors.black54),
         ],
       ),
     );
   }
-
 }

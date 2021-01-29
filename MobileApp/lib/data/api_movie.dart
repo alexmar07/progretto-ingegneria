@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:INGSW_MezMar/config/config.dart';
 import 'package:INGSW_MezMar/models/movie_list.dart';
+import 'package:INGSW_MezMar/models/movie_list_prefer_to_see.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -36,7 +37,6 @@ class MovieRepository {
       'type': type
     };
 
-    print(Config.apiUrl + '/list/add');
     var body = json.encode(data);
 
     // Future<http.Response> response = http.post({url: ''});
@@ -52,5 +52,20 @@ class MovieRepository {
     String message = res['message'];
 
     return message;
+  }
+
+  Future<MovieListPreferToSee> getMyMovieList(String type) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String url = Config.apiUrl + '/list?type=' + type;
+
+    final response = await http
+        .get(url, headers: {"Authorization": prefs.getString('token')});
+
+    if (response.statusCode == 200) {
+      return MovieListPreferToSee.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Faild to load');
+    }
   }
 }

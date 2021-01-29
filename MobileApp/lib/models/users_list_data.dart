@@ -8,25 +8,21 @@ class UsersListData {
     this.surname = '',
     this.username = '',
     this.id = 0,
-
   });
-
 
   String name;
   String surname;
   String username;
   int id;
 
-
-
   static List<UsersListData> usersList = <UsersListData>[];
   static UsersListData singleUser;
 
   UsersListData.fromJson(Map<String, dynamic> json) {
     var items = json['items']['rows'];
-    for ( var i in items) {
-     usersList.add(UsersListData(
-        id : i['id'],
+    for (var i in items) {
+      usersList.add(UsersListData(
+        id: i['id'],
         name: i['name'],
         surname: i['surname'],
         username: i['username'],
@@ -35,7 +31,8 @@ class UsersListData {
   }
 
   Future<UsersListData> fetchUsersListData() async {
-    final response = await http.get('http://appprogetto.altervista.org/api/public/index.php/accommodations');
+    final response = await http.get(
+        'http://appprogetto.altervista.org/api/public/index.php/accommodations');
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
@@ -47,24 +44,22 @@ class UsersListData {
     }
   }
 
-  Future<UsersListData> fetchSingleUser( int id ) async {
-
-    print('http://appprogetto.altervista.org/api/public/index.php/accommodations/' + id.toString());
-    final response = await http.get('http://appprogetto.altervista.org/api/public/index.php/accommodations/' + id.toString() );
+  Future<UsersListData> fetchSingleUser(int id) async {
+    final response = await http.get(
+        'http://appprogetto.altervista.org/api/public/index.php/accommodations/' +
+            id.toString());
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      Map<String, dynamic> json =  jsonDecode(response.body);
+      Map<String, dynamic> json = jsonDecode(response.body);
       var data = json['items'];
 
-     singleUser = UsersListData(
-        id : data['id'],
+      singleUser = UsersListData(
+        id: data['id'],
         name: data['name'],
         surname: data['surname'],
-        username:  data['username'],
-
+        username: data['username'],
       );
-
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.

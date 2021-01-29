@@ -36,7 +36,6 @@ class Movie {
         popularity: json["popularity"].toDouble(),
         posterPath: Config.imageBaseUrl + json["poster_path"],
         originalTitle: json["original_title"],
-        genreIds: new List<int>.from(json["genre_ids"].map((x) => x)),
         backdropPath: Config.imageBaseUrl + json["backdrop_path"],
         overview: json["overview"],
         releaseDate: DateFormat('dd/MM/yyyy')

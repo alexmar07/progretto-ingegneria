@@ -181,7 +181,18 @@ class _SingleMovieState extends State<SingleMovie> {
                                         Icons.remove_red_eye,
                                         color: Colors.teal,
                                       ),
-                                      onPressed: () {}),
+                                      onPressed: () async {
+                                        String message = await MovieRepository()
+                                            .addMovieList(movie.id, 'to_see');
+                                        print(message);
+                                        return showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                content: Text(message),
+                                              );
+                                            });
+                                      }),
                                   alignment: Alignment.centerLeft,
                                 ),
                               ],
