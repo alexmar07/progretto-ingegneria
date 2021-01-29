@@ -95,6 +95,7 @@ class Movies_list extends Core_Controller {
                     'original_title'    =>  $movie['original_title'],
                     'overview'          =>  $movie['overview'],
                     'release_date'      =>  $movie['release_date'],
+                    'backdrop_path'     =>  $movie['backdrop_path']
                 ];
             }
 
