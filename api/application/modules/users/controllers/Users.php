@@ -47,7 +47,7 @@ class Users extends Core_Controller {
             ->callback([$this,'check_unique_username'], 'L\'username è gia stato utilizzato', $post);
 
         if ( ! $this->validation->is_valid() ) {
-            $this->response(json(FALSE, $this->validation->get_error_message()));
+            $this->response(json(FALSE, $this->validation->get_error_message()),200);
         }
 
         $user_id = $this->ion_auth->register($post['username'], $post['password'], $post['email'], [
@@ -57,10 +57,10 @@ class Users extends Core_Controller {
         ]);
 
         if ( $user_id == false ) {
-            $this->response(json(FALSE, 'Errore durante la registrazione'));
+            $this->response(json(FALSE, 'Errore durante la registrazione'),200);
         }
 
-        $this->response(json(TRUE, 'La registrazione è stata effettuata con successo'));
+        $this->response(json(TRUE, 'La registrazione è stata effettuata con successo'),200);
 
     }
 
@@ -90,10 +90,10 @@ class Users extends Core_Controller {
         // allora l'inserimento è andato a buon fine
         // altrimenti è fallito
         if ( $notification_id != 0 ) {
-            $this->response(json(TRUE,'Invio notifica riuscito', ['notification_id'    =>  $notification_id]));
+            $this->response(json(TRUE,'Invio notifica riuscito', ['notification_id'    =>  $notification_id]),200);
         }
         else {
-            $this->response(json(FALSE,'Invio notifica fallito'));
+            $this->response(json(FALSE,'Invio notifica fallito'),200);
         }
 
     }
@@ -106,7 +106,7 @@ class Users extends Core_Controller {
      * altrimenti non succede nulla. 
      * In entrambi i casi la notifica viene cancellata.
      * 
-     * @params int $notification_id Id della notifica
+     * @param int $notification_id Id della notifica
      * @return json
      * @access public
      */
@@ -117,7 +117,7 @@ class Users extends Core_Controller {
 
         // Controllo se esiste l'azione
         if ( ! isset($action) || empty($action)) {
-            $this->response(json(FALSE,'Non è stata scelta l\'azione'));
+            $this->response(json(FALSE,'Non è stata scelta l\'azione'),200);
         } 
 
         // Starto la transizione
@@ -146,7 +146,7 @@ class Users extends Core_Controller {
             $this->db->trans_rollback();
 
             // Invio il messaggio di errore
-            $this->response(json(FALSE,'Errore durante l\'azione'));
+            $this->response(json(FALSE,'Errore durante l\'azione'),200);
         }
         else {
 
@@ -154,7 +154,7 @@ class Users extends Core_Controller {
             $this->db->trans_commit();
             
             // Invio la risposta di successo
-            $this->response(json(TRUE,'Il collegamento è stato accettato'));
+            $this->response(json(TRUE,'Il collegamento è stato accettato'),200);
 
         }
 
@@ -176,10 +176,10 @@ class Users extends Core_Controller {
 
         // Controllo se le notifiche
         if ( empty($notifications) ) {
-            $this->response(json(FALSE, 'Non ci sono notifiche'));
+            $this->response(json(FALSE, 'Non ci sono notifiche'),200);
         }
         else {
-            $this->response(json(TRUE,'Lista delle notifiche', [ 'notifications' => $notifications] ));
+            $this->response(json(TRUE,'Lista delle notifiche', [ 'notifications' => $notifications]),200);
         }
 
     }
@@ -200,7 +200,7 @@ class Users extends Core_Controller {
         $this->validation->required(['subject','body'], 'Il campo è obbligatorio');
 
         if ( ! $this->validation->is_valid() ) {
-            $this->response(json(FALSE, $this->validation->get_error_message()));
+            $this->response(json(FALSE, $this->validation->get_error_message()),200);
         }
 
         $this->load->library('email');
@@ -219,7 +219,7 @@ class Users extends Core_Controller {
             }
         } 
 
-        $this->response(json(TRUE, 'Le newsletter sono state inviate'));
+        $this->response(json(TRUE, 'Le newsletter sono state inviate'),200);
         
     }
 
