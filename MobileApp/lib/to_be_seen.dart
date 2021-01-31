@@ -104,7 +104,7 @@ Widget itemCard(Movie movie) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            width: 140.0,
+            width: 130.0,
             height: 160.0,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
