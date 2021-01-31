@@ -83,7 +83,7 @@ class Users extends Core_Controller {
         
         $users = $this->main_m->get_users($get['page'], $search);
 
-        $this->response(json(TRUE, 'Lista utenti', $users));        
+        $this->response(json(TRUE, 'Lista utenti', $users),200);        
     } 
 
     //------------------------------------------------------------------------------------------
