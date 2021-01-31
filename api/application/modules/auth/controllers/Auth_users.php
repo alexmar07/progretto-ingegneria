@@ -45,7 +45,7 @@ class Auth_users extends RestController {
 
         
         // Imposto la validazione
-        $this->validation->required(['email','password'], 'I campi non possono essere vuoti');
+        $this->validation->required(['username','password'], 'I campi non possono essere vuoti');
         
         // Se la validazione non è andata a buon fine 
         // invio l'errore riscontrato
@@ -58,10 +58,10 @@ class Auth_users extends RestController {
         }
             
         // Provo ad eseguire il login
-        if ( $this->ion_auth_m->login($data['email'], $data['password']) ) {
+        if ( $this->ion_auth_m->login($data['username'], $data['password']) ) {
 
             // Se viene eseguito il login recupero i dati dell'utente
-            $user = $this->user_m->get_by(['email' => $data['email']]);
+            $user = $this->user_m->get_by(['username' => $data['username']]);
 
             // Dati da inserire nel JWT
             $token = [
