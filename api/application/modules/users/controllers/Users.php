@@ -226,14 +226,29 @@ class Users extends Core_Controller {
     //------------------------------------------------------------------------------------------
 
     /**
+     * Funzione che controlla se esiste una sola email
+     * 
+     * @param array $data Dati inviati
+     * @return bool
+     */
+    public function check_unique_email($data) {
+
+        return $this->main_m->unique('email', $data['email']);
+    } 
+
+    //------------------------------------------------------------------------------------------
+    
+    /**
      * Funzione che controlla se esiste un solo username
      * 
      * @param array $data Dati inviati
      * @return bool
      */
-    public function check_unique_email 
+    public function check_unique_username($data) {
 
-    //------------------------------------------------------------------------------------------
+        return $this->main_m->unique('username', $data['username']);
+    }
+
     //------------------------------------------------------------------------------------------
 
 
