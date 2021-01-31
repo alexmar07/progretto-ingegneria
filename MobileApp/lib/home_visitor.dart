@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'movie_list_screen.dart';
+import 'movie_list_screen_visitors.dart';
 
 class HomeVisitor extends StatefulWidget {
   @override
@@ -65,7 +66,7 @@ class _HomeVisitorState extends State<HomeVisitor> {
                           context,
                           MaterialPageRoute<dynamic>(
                               builder: (BuildContext context) =>
-                                  MovieListScreen(),
+                                  MovieListVisitorsScreen(),
                               fullscreenDialog: true),
                         );
                       },

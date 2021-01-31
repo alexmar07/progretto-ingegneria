@@ -9,15 +9,15 @@ import 'models/movie.dart';
 Color textColor = Colors.black54;
 Color textSecondry = Colors.grey;
 
-class SingleMovie extends StatefulWidget {
-  SingleMovie(this.movie);
+class SingleMovieVisitors extends StatefulWidget {
+  SingleMovieVisitors(this.movie);
   Movie movie;
   @override
-  _SingleMovieState createState() => _SingleMovieState(movie);
+  _SingleMovieVisitorsState createState() => _SingleMovieVisitorsState(movie);
 }
 
-class _SingleMovieState extends State<SingleMovie> {
-  _SingleMovieState(this.movie);
+class _SingleMovieVisitorsState extends State<SingleMovieVisitors> {
+  _SingleMovieVisitorsState(this.movie);
   var token;
   Movie movie;
   @override
@@ -40,28 +40,6 @@ class _SingleMovieState extends State<SingleMovie> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.only(left: 10, right: 10, bottom: 5),
-        child: FlatButton(
-          color: Colors.teal,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => WriteReview()),
-            );
-          },
-          textColor: Colors.white,
-          child: Text(
-            'SCRIVI UNA RECENSIONE',
-            style: TextStyle(
-                fontFamily: 'Quicksand',
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
-          ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        ),
-      ),
       body: ListView(
         children: <Widget>[
           Container(
@@ -141,58 +119,6 @@ class _SingleMovieState extends State<SingleMovie> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Text(movie.voteAverage.toString()),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            child: Column(
-                              children: <Widget>[
-                                Align(
-                                  child: IconButton(
-                                      icon: Icon(
-                                        Icons.favorite,
-                                        color: Colors.redAccent,
-                                      ),
-                                      onPressed: () async {
-                                        String message = await MovieRepository()
-                                            .addMovieList(movie.id, 'prefer');
-
-                                        return showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                content: Text(message),
-                                              );
-                                            });
-                                      }),
-                                  alignment: Alignment.centerLeft,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            child: Column(
-                              children: <Widget>[
-                                Align(
-                                  child: IconButton(
-                                      icon: Icon(
-                                        Icons.remove_red_eye,
-                                        color: Colors.teal,
-                                      ),
-                                      onPressed: () async {
-                                        String message = await MovieRepository()
-                                            .addMovieList(movie.id, 'to_see');
-                                        print(message);
-                                        return showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                content: Text(message),
-                                              );
-                                            });
-                                      }),
-                                  alignment: Alignment.centerLeft,
-                                ),
                               ],
                             ),
                           ),
