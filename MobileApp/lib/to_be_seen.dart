@@ -51,11 +51,13 @@ class ToSeeListView extends StatefulWidget {
 }
 
 class _ToSeeListViewState extends State<ToSeeListView> {
-  List<Movie> movie;
+  List<Movie> movies;
+  String message;
 
   @override
   void initState() {
-    movie = widget.movies.movies;
+    movies = widget.movies.movies;
+    message = widget.movies.message;
     super.initState();
   }
 
@@ -67,12 +69,23 @@ class _ToSeeListViewState extends State<ToSeeListView> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
-      child: ListView.builder(
-        itemCount: movie.length,
-        itemBuilder: (BuildContext ctx, int i) {
-          return itemCard(movie[i]);
-        },
-      ),
+      child: movies.isEmpty
+          ? Center(child: Text('Non ci sono film'))
+          : ListView.builder(
+              itemCount: movies.length,
+              itemBuilder: (BuildContext ctx, int i) {
+                return Dismissible(
+                    key: Key(movies[i].title),
+                    onDismissed: (direction) => {
+                          setState(() {
+                            MovieRepository()
+                                .removeMovieList(movies[i].id, 'to_see');
+                            movies.removeAt(i);
+                          })
+                        },
+                    child: itemCard(movies[i]));
+              },
+            ),
     );
   }
 }
@@ -148,16 +161,6 @@ Widget itemCard(Movie movie) {
                     ),
                   ),
                   SizedBox(width: 55.0),
-                  Container(
-                    child: FlatButton(
-                      color: Colors.redAccent,
-                      onPressed: () {},
-                      textColor: Colors.white,
-                      child: Icon(Icons.favorite_border),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                    ),
-                  )
                 ],
               )
             ],

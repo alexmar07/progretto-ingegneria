@@ -1,11 +1,26 @@
+import 'package:INGSW_MezMar/models/users_singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../change_details.dart';
 import '../models/tabs.dart';
 import '../models/auth.dart';
-class AppDrawer extends StatelessWidget {
+
+class AppDrawer extends StatefulWidget {
   @override
-  Widget build( context) {
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  String username;
+
+  @override
+  void initState() {
+    username = UsersSingleton.instance.username;
+    super.initState();
+  }
+
+  @override
+  Widget build(context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -13,7 +28,6 @@ class AppDrawer extends StatelessWidget {
           DrawerHeader(
             child: Column(
               children: <Widget>[
-
                 SizedBox(
                   height: 10,
                 ),
@@ -22,7 +36,7 @@ class AppDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Username',
+                        username,
                         style: TextStyle(
                             fontFamily: 'poppins-regular',
                             fontSize: 25.0,
@@ -38,7 +52,6 @@ class AppDrawer extends StatelessWidget {
               color: Colors.teal,
             ),
           ),
-
           Divider(),
           ListTile(
             title: Text('Modifica Profilo'),
@@ -48,12 +61,11 @@ class AppDrawer extends StatelessWidget {
               Navigator.push<dynamic>(
                 context,
                 MaterialPageRoute<dynamic>(
-                    builder: ( context) => ChangeDetails(),
+                    builder: (context) => ChangeDetails(),
                     fullscreenDialog: true),
               );
             },
           ),
-
           Divider(),
           ListTile(
             title: Text('Logout'),

@@ -1,17 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class ForgotPassword extends StatefulWidget {
   @override
   _ForgotPassword createState() => _ForgotPassword();
 }
 
 class _ForgotPassword extends State<ForgotPassword> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,11 +73,6 @@ class _ForgotPassword extends State<ForgotPassword> {
     );
   }
 
-
-
-
-
-
   Widget emailField() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -106,9 +96,7 @@ class _ForgotPassword extends State<ForgotPassword> {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                  color: Colors.teal,
-                  width: 0.5,
-                  style: BorderStyle.solid),
+                  color: Colors.teal, width: 0.5, style: BorderStyle.solid),
             ),
           ),
           padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -118,19 +106,15 @@ class _ForgotPassword extends State<ForgotPassword> {
             children: <Widget>[
               new Expanded(
                 child: TextField(
-                  onChanged: (String str){
-                    setState(() {
-                    });
+                  onChanged: (String str) {
+                    setState(() {});
                   },
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.teal
-                  ),
+                  style: TextStyle(color: Colors.teal),
                   keyboardType: TextInputType.number,
                   cursorColor: Colors.teal,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-
                     hintText: '',
                     hintStyle: TextStyle(color: Theme.of(context).accentColor),
                   ),
@@ -139,12 +123,10 @@ class _ForgotPassword extends State<ForgotPassword> {
             ],
           ),
         ),
-
         const SizedBox(
           height: 8,
         )
       ],
     );
   }
-
- }
+}

@@ -202,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen>
                 child: new Padding(
                   padding: const EdgeInsets.only(left: 40.0),
                   child: new Text(
-                    "EMAIL",
+                    "USERNAME",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.teal,
@@ -234,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen>
                     style: TextStyle(color: Colors.teal),
                     onChanged: (String str) {
                       setState(() {
-                        _logindata.email = str;
+                        _logindata.username = str;
                       });
                     },
                     textAlign: TextAlign.left,
@@ -335,7 +335,8 @@ class _LoginScreenState extends State<LoginScreen>
                     color: Colors.teal,
                     onPressed: () async {
                       FocusScope.of(context).unfocus();
-                      Provider.of<Auth>(context).setEmail(_logindata.email);
+                      Provider.of<Auth>(context)
+                          .setUsername(_logindata.username);
                       Provider.of<Auth>(context)
                           .setPassword(_logindata.password);
                       var jwt = await Provider.of<Auth>(context).getJwt();
@@ -825,21 +826,21 @@ class _SignupData {
 }
 
 class _LoginData {
-  String email = '';
+  String username = '';
   String password = '';
 
-  _LoginData({this.email, this.password});
+  _LoginData({this.username, this.password});
 
   factory _LoginData.fromJson(Map<String, dynamic> json) {
     return _LoginData(
-      email: json['email'],
+      username: json['username'],
       password: json['password'],
     );
   }
 
   Map toMap() {
     var map = new Map<String, dynamic>();
-    map["email"] = email;
+    map["username"] = username;
     map["password"] = password;
     map["apikey"] = 'somesecretkey';
     return map;

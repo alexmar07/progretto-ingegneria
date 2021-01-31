@@ -14,7 +14,8 @@ class MovieListPreferToSee {
   factory MovieListPreferToSee.fromJson(Map<String, dynamic> json) =>
       new MovieListPreferToSee(
         message: json['message'],
-        movies:
-            new List<Movie>.from(json["data"].map((x) => Movie.fromJson(x))),
+        movies: json.containsKey('data')
+            ? new List<Movie>.from(json["data"].map((x) => Movie.fromJson(x)))
+            : new List(),
       );
 }

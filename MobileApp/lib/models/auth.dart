@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:INGSW_MezMar/config/config.dart';
+import 'package:INGSW_MezMar/models/users_singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth with ChangeNotifier {
@@ -9,12 +11,12 @@ class Auth with ChangeNotifier {
   String _token;
   String get token => _token;
   bool get state => _state;
-  String _email;
+  String _username;
   String _password;
   String _errorMessage;
   String get errorMessage => _errorMessage;
 
-  void setEmail(email) => _email = email;
+  void setUsername(username) => _username = username;
   void setPassword(password) => _password = password;
 
   void changeToken(t) async {
@@ -31,10 +33,15 @@ class Auth with ChangeNotifier {
 
   dynamic getJwt() async {
     var response = await http.post(Config.apiUrl + '/login',
-        body: {'email': _email, 'password': _password});
+        body: {'username': _username, 'password': _password});
 
     var json = jsonDecode(response.body);
     if (json['success'] == true) {
+      Map<String, dynamic> decodedToken =
+          JwtDecoder.decode(json['data']['jwt']);
+      var user = UsersSingleton.instance;
+
+      user.setUsername(decodedToken['username']);
       return json['data']['jwt'];
     } else {
       _errorMessage = json['message'];

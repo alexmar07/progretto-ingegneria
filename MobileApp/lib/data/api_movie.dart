@@ -39,7 +39,6 @@ class MovieRepository {
 
     var body = json.encode(data);
 
-    // Future<http.Response> response = http.post({url: ''});
     var response = await http.post(Config.apiUrl + '/list/add',
         headers: {
           'Authorization': prefs.getString('token'),
@@ -67,5 +66,20 @@ class MovieRepository {
     } else {
       throw Exception('Faild to load');
     }
+  }
+
+  dynamic removeMovieList(int movieId, String type) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    Map data = {'movie_id': movieId, 'type': type};
+
+    var body = json.encode(data);
+
+    var response = await http.delete(
+        Config.apiUrl + '/list/remove/' + movieId.toString() + '/' + type,
+        headers: {
+          'Authorization': prefs.getString('token'),
+          'Content-type': 'application/json',
+        });
   }
 }
