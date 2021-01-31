@@ -62,5 +62,6 @@ $route['users/register']        = 'users/users/register';
 $route['users/newsletter']      = 'users/users/send_newsletter';
 
 
-$route['list/add']              = 'movies/movies_list/add';
-$route['list']                  = 'movies/movies_list/list';
+$route['list/add']                      = 'movies/movies_list/add';
+$route['list']                          = 'movies/movies_list/list';
+$route['list/remove/(:num)/(:any)']     = 'movies/movies_list/remove/$1/$2';

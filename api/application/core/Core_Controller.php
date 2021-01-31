@@ -74,7 +74,7 @@ class Core_Controller extends RestController {
 
         // Assegno il JWT, se è falso allora il JWT non è autorizzato
         if ( ($this->jwt = $this->check_api_access()) == false ) {
-            $this->response(json(FALSE,'Non sei autorizzato'));
+            $this->response(json(FALSE,'Non sei autorizzato'),200);
         } 
 
     }
@@ -101,7 +101,7 @@ class Core_Controller extends RestController {
             $decodedToken = AUTHORIZATION::validateTimestamp($headers['Authorization']);
         }
         else {
-            $this->response(json(FALSE,['message' => 'JWT non valido']));
+            $this->response(json(FALSE,['message' => 'JWT non valido']),200);
         }
         
         return $decodedToken;

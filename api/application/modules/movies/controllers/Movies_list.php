@@ -107,7 +107,29 @@ class Movies_list extends Core_Controller {
         $this->response(json($status, $message, $results),200);
 
     }
-    
+
+
+    //-----------------------------------------------------------------------------
+
+    /**
+     * Rimozione film dalla lista
+     * 
+     * @param int $movie_id
+     * @param string $type
+     * @return json
+     */
+    public function remove_delete($movie_id, $type) {
+
+        $this->main_m->delete_by([
+            'user_id'   =>  $this->jwt->id,
+            'movie_id'  =>  $movie_id,
+            'type'      =>  $type,
+        ]);
+
+        $this->response(json(TRUE, 'Film rimosso'),200);
+
+    }
+
     //-----------------------------------------------------------------------------
 
     public function create_client() {
