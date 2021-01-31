@@ -23,7 +23,7 @@ class Users extends Core_Controller {
 
         // Carico i modelli
         $this->load->model($this->module.'/user_to_user_model', 'user_to_user_m');
-        $this->load->model($this->module.'/user_notifications', 'notification_m');
+        $this->load->model($this->module.'/user_notifications_model', 'notification_m');
     }
     
     //------------------------------------------------------------------------------------------
@@ -63,6 +63,28 @@ class Users extends Core_Controller {
         $this->response(json(TRUE, 'La registrazione è stata effettuata con successo'),200);
 
     }
+
+    //------------------------------------------------------------------------------------------
+
+    /**
+     * Funziona che restituisce la lista degli utenti
+     * 
+     * @return json
+     */
+    public function list_get () {
+
+        $get = $this->get();
+
+        $search = []; 
+
+        if ( isset($get['q']) ) {
+            $search = $get['q'];
+        }
+        
+        $users = $this->main_m->get_users($get['page'], $search);
+
+        $this->response(json(TRUE, 'Lista utenti', $users));        
+    } 
 
     //------------------------------------------------------------------------------------------
 

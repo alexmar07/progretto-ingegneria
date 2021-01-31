@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:INGSW_MezMar/config/config.dart';
 import 'movie.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class MovieListData {
