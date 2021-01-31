@@ -1,7 +1,7 @@
 import 'package:INGSW_MezMar/models/users_singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../change_details.dart';
+
 import '../models/tabs.dart';
 import '../models/auth.dart';
 
@@ -52,21 +52,6 @@ class _AppDrawerState extends State<AppDrawer> {
               color: Colors.teal,
             ),
           ),
-          Divider(),
-          ListTile(
-            title: Text('Modifica Profilo'),
-            leading: Icon(Icons.face),
-            onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-              Navigator.push<dynamic>(
-                context,
-                MaterialPageRoute<dynamic>(
-                    builder: (context) => ChangeDetails(),
-                    fullscreenDialog: true),
-              );
-            },
-          ),
-          Divider(),
           ListTile(
             title: Text('Logout'),
             leading: Icon(Icons.lock_open),

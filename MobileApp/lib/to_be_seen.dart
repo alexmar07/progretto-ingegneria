@@ -94,7 +94,7 @@ Widget itemCard(Movie movie) {
   return Padding(
     padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
     child: Container(
-      height: 120.0,
+      height: 140.0,
       width: double.infinity,
       //color: Colors.white,
       decoration: BoxDecoration(
@@ -145,24 +145,32 @@ Widget itemCard(Movie movie) {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    height: 25.0,
-                    width: 80.0,
-                    child: Text(
-                      movie.voteAverage.toString(),
-                      style: TextStyle(
-                          fontSize: 19.0,
-                          color: Colors.orangeAccent,
-                          fontFamily: 'Quicksand',
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  SizedBox(width: 55.0),
-                ],
-              )
+              Container(
+                height: 55.0,
+                width:140.0,
+                child: Text(
+                  movie.voteAverage.toString() + '/10',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.teal,
+                      fontFamily: 'Quicksand',
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                height: 20.0,
+                width:140.0,
+                child: Text(
+                  'Trascina per rimuovere',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 11.0,
+                      color: Colors.blueGrey,
+                      fontFamily: 'Quicksand',
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ],
           )
         ],

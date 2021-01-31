@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:INGSW_MezMar/login.dart';
 import 'package:provider/provider.dart';
-import '../change_details.dart';
 import '../models/tabs.dart';
 import '../models/auth.dart';
 class AppDrawerVisitor extends StatelessWidget {

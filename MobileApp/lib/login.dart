@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:INGSW_MezMar/forgot_password.dart';
 import 'package:INGSW_MezMar/welcome_visitor.dart';
 import 'package:provider/provider.dart';
 import 'models/auth.dart';
@@ -301,23 +300,6 @@ class _LoginScreenState extends State<LoginScreen>
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(right: 20.0),
-                child: new FlatButton(
-                  child: new Text(
-                    "Password dimenticata?",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.teal,
-                        fontSize: 15.0,
-                        fontFamily: 'Quicksand'),
-                    textAlign: TextAlign.end,
-                  ),
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ForgotPassword()),
-                    ),
-                  },
-                ),
               ),
             ],
           ),
