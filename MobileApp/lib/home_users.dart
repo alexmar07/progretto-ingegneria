@@ -9,7 +9,8 @@ class HomeUsers extends StatefulWidget {
 class _HomeUsersState extends State<HomeUsers> {
   double _width;
   double _height;
-  @override
+  String search;
+
   @override
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
@@ -59,15 +60,10 @@ class _HomeUsersState extends State<HomeUsers> {
                     //height: _height/15,
                     alignment: Alignment.topCenter,
                     child: TextFormField(
-                      onTap: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        Navigator.push<dynamic>(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                              builder: (BuildContext context) =>
-                                  UsersSearchScreen(),
-                              fullscreenDialog: true),
-                        );
+                      onChanged: (text) {
+                        setState(() {
+                          search = text;
+                        });
                       },
                       cursorColor: Colors.grey,
                       decoration: InputDecoration(
@@ -100,10 +96,9 @@ class _HomeUsersState extends State<HomeUsers> {
                   Colors.black.withOpacity(0.1), BlendMode.dstATop),
               image: AssetImage('assets/images/friends_cinema.jpg'),
               fit: BoxFit.cover,
-
             ),
           ),
-        )
-    );
+          child: UsersListScreen(),
+        ));
   }
 }

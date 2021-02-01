@@ -15,7 +15,9 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   void initState() {
-    username = UsersSingleton.instance.username;
+    username = UsersSingleton.instance.username != null
+        ? UsersSingleton.instance.username
+        : '';
     super.initState();
   }
 

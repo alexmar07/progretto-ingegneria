@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Interfaces\NotificationInterface;
-use phpDocumentor\Reflection\Types\This;
 
 /**
  * Controller per gli utenti
