@@ -7,10 +7,9 @@
 class User_model extends MY_Model {
 
     // Nome della tabella
-    protected $_table = 'users';
-    protected $_table_alias = 'U';
-
-    private $for_page  = 20;
+    protected   $_table           = 'users';
+    protected   $_table_alias     = 'U';
+    private     $for_page         = 20;
 
     public function get_users($page = 1, $search = '') {
 

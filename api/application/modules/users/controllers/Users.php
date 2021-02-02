@@ -111,10 +111,10 @@ class Users extends Core_Controller {
         // allora l'inserimento è andato a buon fine
         // altrimenti è fallito
         if ( $notification_id != 0 ) {
-            $this->response(json(TRUE,'Invio notifica riuscito', ['notification_id'    =>  $notification_id]),200);
+            $this->response(json(TRUE,'La richiesta è stata inviata', ['notification_id'    =>  $notification_id]),200);
         }
         else {
-            $this->response(json(FALSE,'Invio notifica fallito'),200);
+            $this->response(json(FALSE,'Errore durante l\'invio della richiesta'),200);
         }
 
     }
