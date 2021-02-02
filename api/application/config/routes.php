@@ -66,3 +66,4 @@ $route['users/list']            = 'users/users/list';
 $route['list/add']                      = 'movies/movies_list/add';
 $route['list']                          = 'movies/movies_list/list';
 $route['list/remove/(:num)/(:any)']     = 'movies/movies_list/remove/$1/$2';
+$route['reviews']                       = 'movies/movies_reviews';
