@@ -7,6 +7,6 @@
 class Movie_review_model extends MY_Model {
 
     // Nome della tabella
-    protected $_table = 'movies_reviews';
+    protected $_table = 'reviews';
 
 }
