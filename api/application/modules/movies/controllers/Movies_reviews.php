@@ -4,7 +4,7 @@
  * Controller per la lista utenti
  * 
  */
-class Movies_list extends Core_Controller {
+class Movies_reviews extends Core_Controller {
      
     public $module  = 'movies';
     public $model   = 'movie_review';
