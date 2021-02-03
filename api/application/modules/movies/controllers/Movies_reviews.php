@@ -33,6 +33,20 @@ class Movies_reviews extends Core_Controller {
         }
 
         $this->response(json(FALSE, 'Errore durante l\'inserimento della recensione'),200);
+    }
+
+
+    public function list_get() {
+        
+        $get = $this->get();
+
+        $results = $this->main_m->get_reviews_by_movie($get['movie_id'], $get['page']);
+
+        if ( ! empty($results)) {
+            $this->response(json(TRUE, 'Lista delle recensioni', $results));
+        }
+
+        $this->response(json(FALSE, 'Non ci sono recensioni'));
 
     }
 }
