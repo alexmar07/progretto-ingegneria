@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:INGSW_MezMar/config/config.dart';
 import 'package:INGSW_MezMar/models/movie_list.dart';
 import 'package:INGSW_MezMar/models/movie_list_prefer_to_see.dart';
+import 'package:INGSW_MezMar/models/reviews_list.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -104,5 +105,24 @@ class MovieRepository {
         body: body);
 
     return json.decode(response.body);
+  }
+
+  Future<ReviewsList> getReviewsByMovie(int movieId, int currentPage) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    var url = Config.apiUrl +
+        '/reviews/list?movie_id=' +
+        movieId.toString() +
+        '&page=' +
+        currentPage.toString();
+
+    final response = await http
+        .get(url, headers: {"Authorization": prefs.getString('token')});
+
+    if (response.statusCode == 200) {
+      return ReviewsList.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Faild to load');
+    }
   }
 }

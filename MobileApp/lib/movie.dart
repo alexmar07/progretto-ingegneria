@@ -5,6 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:INGSW_MezMar/write_review.dart';
 import 'models/movie.dart';
+import 'models/reviews.dart';
+import 'models/reviews_list.dart';
 
 Color textColor = Colors.black54;
 Color textSecondry = Colors.grey;
@@ -23,18 +25,6 @@ class _SingleMovieState extends State<SingleMovie> {
   @override
   void initState() {
     super.initState();
-  }
-
-  Widget buildicons(index) {
-    List<Widget> widgets = List<Widget>();
-    for (int i = 0; i < int.tryParse(index); i++) {
-      widgets.add(Icon(
-        Icons.star,
-        color: Colors.orange[100],
-        size: 15,
-      ));
-    }
-    return Row(children: widgets);
   }
 
   @override
@@ -183,7 +173,7 @@ class _SingleMovieState extends State<SingleMovie> {
                                       onPressed: () async {
                                         String message = await MovieRepository()
                                             .addMovieList(movie.id, 'to_see');
-                                        print(message);
+
                                         return showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
@@ -230,7 +220,22 @@ class _SingleMovieState extends State<SingleMovie> {
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(10),
-                                    child: Text('QUI CI VANNO LE RECENSIONI'),
+                                    child: FutureBuilder(
+                                      future: MovieRepository()
+                                          .getReviewsByMovie(movie.id, 1),
+                                      builder: (BuildContext ctx,
+                                          AsyncSnapshot snapshot) {
+                                        if (snapshot.data == null) {
+                                          return Center(
+                                              child:
+                                                  CircularProgressIndicator());
+                                        } else {
+                                          return MovieReviewsView(
+                                              reviews: snapshot.data,
+                                              movie: movie);
+                                        }
+                                      },
+                                    ),
                                   ),
                                 ]))
                           ],
@@ -244,11 +249,133 @@ class _SingleMovieState extends State<SingleMovie> {
       ),
     );
   }
-  /**
+}
+
+class MovieReviewsView extends StatefulWidget {
+  final ReviewsList reviews;
+  final Movie movie;
+
+  const MovieReviewsView({
+    this.reviews,
+    this.movie,
+    Key key,
+  }) : super(key: key);
+
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<MovieListData>('movie', movie));
+  _MovieReviewsViewState createState() => _MovieReviewsViewState();
+}
+
+class _MovieReviewsViewState extends State<MovieReviewsView> {
+  ScrollController _scrollController = new ScrollController();
+
+  List<Reviews> reviews;
+  Movie movie;
+  int currentPage = 1;
+
+  bool onNotification(ScrollNotification notification) {
+    if (notification is ScrollUpdateNotification) {
+      if (_scrollController.position.maxScrollExtent >
+              _scrollController.offset &&
+          _scrollController.position.maxScrollExtent -
+                  _scrollController.offset <=
+              50) {
+        MovieRepository()
+            .getReviewsByMovie(movie.id, currentPage + 1)
+            .then((val) {
+          currentPage = val.page;
+          setState(() {
+            if (reviews.isNotEmpty) {
+              reviews.addAll(val.reviews);
+              return false;
+            }
+          });
+        });
+      }
+    }
+    return true;
   }
-   */
+
+  @override
+  void initState() {
+    reviews = widget.reviews.reviews;
+    movie = widget.movie;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Widget build(BuildContext context) {
+    return NotificationListener(
+      onNotification: onNotification,
+      child: ListView.builder(
+        itemCount: reviews.length,
+        controller: _scrollController,
+        itemBuilder: (BuildContext ctx, int i) {
+          return itemCard(reviews[i]);
+        },
+      ),
+    );
+  }
+
+  Widget itemCard(Reviews review) {
+    return Padding(
+      padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
+      child: Container(
+        height: 140.0,
+        width: double.infinity,
+        //color: Colors.white,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: Colors.white),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      review.username,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          color: Colors.grey,
+                          fontSize: 15.0),
+                    ),
+                    SizedBox(height: 5.0),
+                    Text(
+                      review.title,
+                      style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          fontSize: 17.0,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 5.0),
+                    Text(
+                      review.description,
+                      style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          fontSize: 17.0,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }

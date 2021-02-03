@@ -147,7 +147,7 @@ Widget itemCard(Movie movie) {
               ),
               Container(
                 height: 55.0,
-                width:140.0,
+                width: 140.0,
                 child: Text(
                   movie.voteAverage.toString() + '/10',
                   textAlign: TextAlign.center,
@@ -160,7 +160,7 @@ Widget itemCard(Movie movie) {
               ),
               Container(
                 height: 20.0,
-                width:140.0,
+                width: 140.0,
                 child: Text(
                   'Trascina per rimuovere',
                   textAlign: TextAlign.center,
