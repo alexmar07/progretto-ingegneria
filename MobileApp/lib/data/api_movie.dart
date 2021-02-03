@@ -82,4 +82,27 @@ class MovieRepository {
           'Content-type': 'application/json',
         });
   }
+
+  Future<Map<String, dynamic>> addReview(
+      int movieId, String title, String description, int valutation) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    Map<String, dynamic> data = {
+      'movie_id': movieId,
+      'title': title,
+      'description': description,
+      'valutation': valutation,
+    };
+
+    var body = json.encode(data);
+    print(body);
+    var response = await http.post(Config.apiUrl + '/reviews/add',
+        headers: {
+          'Authorization': prefs.getString('token'),
+          'Content-type': 'application/json',
+        },
+        body: body);
+
+    return json.decode(response.body);
+  }
 }

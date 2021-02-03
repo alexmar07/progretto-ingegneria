@@ -87,13 +87,13 @@ class _UsersListViewState extends State<UsersListView> {
               itemCount: users.length,
               controller: _scrollController,
               itemBuilder: (BuildContext ctx, int i) {
-                return itemCard(users[i]);
+                return itemCard(users[i], i);
               },
             ),
     );
   }
 
-  Widget itemCard(Users user) {
+  Widget itemCard(Users user, int index) {
     return Padding(
       padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 5.0),
       child: Container(
@@ -155,10 +155,20 @@ class _UsersListViewState extends State<UsersListView> {
                         ),
                         Container(
                           child: FlatButton(
-                            color: Colors.greenAccent,
-                            onPressed: () {
-                              String message =
-                                  UsersRepository().sendRequestLink(user.id);
+                            color: Colors.teal,
+                            onPressed: () async {
+                              String message = await UsersRepository()
+                                  .sendRequestLink(user.id);
+                              setState(() {
+                                users.removeAt(index);
+                              });
+                              return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: Text(message),
+                                    );
+                                  });
                             },
                             textColor: Colors.white,
                             child: Icon(Icons.add),

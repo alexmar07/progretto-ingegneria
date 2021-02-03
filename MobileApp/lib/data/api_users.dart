@@ -28,7 +28,6 @@ class UsersRepository {
     final prefs = await SharedPreferences.getInstance();
 
     var url = Config.apiUrl + '/users/request';
-    print(url);
     final response = await http.post(url,
         headers: {"Authorization": prefs.getString('token')},
         body: json.encode({"user_id": userId}));

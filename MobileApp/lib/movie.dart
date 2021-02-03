@@ -47,7 +47,8 @@ class _SingleMovieState extends State<SingleMovie> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => WriteReview()),
+              MaterialPageRoute(
+                  builder: (context) => WriteReview(movieId: movie.id)),
             );
           },
           textColor: Colors.white,
@@ -251,4 +252,3 @@ class _SingleMovieState extends State<SingleMovie> {
   }
    */
 }
-
