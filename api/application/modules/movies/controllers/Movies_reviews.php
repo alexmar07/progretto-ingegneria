@@ -43,10 +43,10 @@ class Movies_reviews extends Core_Controller {
         $results = $this->main_m->get_reviews_by_movie($get['movie_id'], $get['page']);
 
         if ( ! empty($results)) {
-            $this->response(json(TRUE, 'Lista delle recensioni', $results));
+            $this->response(json(TRUE, 'Lista delle recensioni', $results),200);
         }
 
-        $this->response(json(FALSE, 'Non ci sono recensioni'));
+        $this->response(json(FALSE, 'Non ci sono recensioni'),200);
 
     }
 }
