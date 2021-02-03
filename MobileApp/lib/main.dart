@@ -7,9 +7,9 @@ import 'models/tabs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(Hatkestays());
+void main() => runApp(Cinemates());
 
-class Hatkestays extends StatelessWidget {
+class Cinemates extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class Hatkestays extends StatelessWidget {
       child: Consumer<Auth>(
         builder: (context, counter, _) {
           return MaterialApp(
-            title: 'Hatke Stays',
+            title: 'Cinemates',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.teal,

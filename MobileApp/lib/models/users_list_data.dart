@@ -44,7 +44,7 @@ class UsersListData {
     }
   }
 
-  Future<UsersListData> fetchSingleUser(int id) async {
+  Future<UsersListData> logindata(int id) async {
     final response = await http.get(
         'http://appprogetto.altervista.org/api/public/index.php/accommodations/' +
             id.toString());
