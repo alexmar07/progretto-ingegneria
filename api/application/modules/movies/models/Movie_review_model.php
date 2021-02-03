@@ -18,7 +18,7 @@ class Movie_review_model extends MY_Model {
             'R.title',
             'R.description',
             'R.valutation',
-            'R.username'
+            'U.username'
         ])
         ->order_by('id', 'desc')
         ->limit($this->for_page, $this->for_page * ($page > 0 ? $page - 1 : 0));
