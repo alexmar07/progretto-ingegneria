@@ -24,46 +24,6 @@ class Users extends Core_Controller {
         $this->load->model($this->module.'/user_to_user_model', 'user_to_user_m');
         $this->load->model($this->module.'/user_notifications_model', 'notification_m');
     }
-    
-    //------------------------------------------------------------------------------------------
-
-    // /**
-    //  * Funzione per la registrazione dell'utente
-    //  * 
-    //  * @return json
-    //  */
-    // public function register_post () {
-
-    //     $post = $this->post();
-
-    //     $this->validation->set_data($post);
-
-    //     $this->validation->required(['first_name', 'last_name', 'email', 'password','username'], 'Tutti i campi sono obbligatori')
-    //         ->email('email','L\'email non è valida')
-    //         ->alphanum('username', 'L\'username deve essere composto da caratteri e numeri')
-    //         ->minlen('password',8, 'La password deve essere almeno di 8 caratteri')
-    //         ->callback([$this,'check_unique_email'], 'L\'email è gia stata utilizzata', $post)
-    //         ->callback([$this,'check_unique_username'], 'L\'username è gia stato utilizzato', $post);
-
-    //     if ( ! $this->validation->is_valid() ) {
-    //         $this->response(json(FALSE, $this->validation->get_error_message()),200);
-    //     }
-
-    //     $user_id = $this->ion_auth->register($post['username'], $post['password'], $post['email'], [
-    //         'first_name'    =>  $post['first_name'],
-    //         'last_name'     =>  $post['last_name'],
-    //         'newsletter'    =>  $post['newsletter']
-    //     ]);
-
-    //     if ( $user_id == false ) {
-    //         $this->response(json(FALSE, 'Errore durante la registrazione'),200);
-    //     }
-
-    //     $this->response(json(TRUE, 'La registrazione è stata effettuata con successo'),200);
-
-    // }
-
-    //------------------------------------------------------------------------------------------
 
     /**
      * Funziona che restituisce la lista degli utenti
@@ -144,17 +104,23 @@ class Users extends Core_Controller {
         // Starto la transizione
         $this->db->trans_begin(); 
 
+        $message = 'Hai rifiutato la richiesta';
+
+        $this->notification_m->assign($notification_id);
+
         // Controllo se l'azione è di accettazione di richiesta
         if ( $action == NotificationInterface::ACCEPT_REQUEST ) {
             
             // Recupero i dati della notifica
-            $notification = $this->notification_m->assign($notification_id)->get();
+            $notification = $this->notification_m->get();
 
             // Inserisco l'associazione tra utenti
             $this->user_to_user_m->insert([
                 'user_id_1'  =>  $notification->user_send_id,
                 'user_id_2'  =>  $notification->user_receive_id
             ]);
+
+            $message = 'Hai accettato la richiesta';
         }
 
         // In entrambi i casi cancello la notifica
@@ -175,7 +141,7 @@ class Users extends Core_Controller {
             $this->db->trans_commit();
             
             // Invio la risposta di successo
-            $this->response(json(TRUE,'Il collegamento è stato accettato'),200);
+            $this->response(json(TRUE, $message),200);
 
         }
 
@@ -192,6 +158,7 @@ class Users extends Core_Controller {
 
         // Recupero le notifiche di un utente
         $this->db->select([
+            'N.id',
             'U.first_name',
             'U.last_name',
             'U.username',
@@ -246,35 +213,4 @@ class Users extends Core_Controller {
         $this->response(json(TRUE, 'Le newsletter sono state inviate'),200);
         
     }
-
-    //------------------------------------------------------------------------------------------
-
-    /**
-     * Funzione che controlla se esiste una sola email
-     * 
-     * @param array $data Dati inviati
-     * @return bool
-     */
-    public function check_unique_email($data) {
-
-        return $this->main_m->unique('email', $data['email']);
-    } 
-
-    //------------------------------------------------------------------------------------------
-    
-    /**
-     * Funzione che controlla se esiste un solo username
-     * 
-     * @param array $data Dati inviati
-     * @return bool
-     */
-    public function check_unique_username($data) {
-
-        return $this->main_m->unique('username', $data['username']);
-    }
-
-    //------------------------------------------------------------------------------------------
-
-
-
 }
