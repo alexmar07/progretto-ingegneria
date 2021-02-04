@@ -163,6 +163,16 @@ class _NotificationsListViewState extends State<NotificationsListView> {
                             var response = await UsersRepository()
                                 .acceptOrRefuseRequest(
                                     notification.id, 'accept_request');
+                            setState(() {
+                              notifications.removeAt(index);
+                            });
+                            return showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Text(response['message']),
+                                  );
+                                });
                           },
                           textColor: Colors.white,
                           child: Center(
@@ -183,7 +193,6 @@ class _NotificationsListViewState extends State<NotificationsListView> {
                             var response = await UsersRepository()
                                 .acceptOrRefuseRequest(
                                     notification.id, 'reject_request');
-                            print(response);
                             setState(() {
                               notifications.removeAt(index);
                             });
