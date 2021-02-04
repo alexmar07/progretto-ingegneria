@@ -96,7 +96,7 @@ class MovieRepository {
     };
 
     var body = json.encode(data);
-    print(body);
+
     var response = await http.post(Config.apiUrl + '/reviews/add',
         headers: {
           'Authorization': prefs.getString('token'),

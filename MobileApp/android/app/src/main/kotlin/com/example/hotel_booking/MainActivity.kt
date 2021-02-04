@@ -1,4 +1,4 @@
-package com.example.hotel_booking
+package com.example.cinemates
 
 import android.os.Bundle
 

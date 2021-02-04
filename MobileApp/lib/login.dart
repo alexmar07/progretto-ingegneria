@@ -1,3 +1,4 @@
+import 'package:INGSW_MezMar/data/api_users.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:INGSW_MezMar/welcome_visitor.dart';
@@ -524,7 +525,7 @@ class _LoginScreenState extends State<LoginScreen>
                   child: TextField(
                     onChanged: (String str) {
                       setState(() {
-                        _data.surname = str;
+                        _data.username = str;
                       });
                     },
                     style: TextStyle(color: Colors.teal),
@@ -673,7 +674,32 @@ class _LoginScreenState extends State<LoginScreen>
                       borderRadius: new BorderRadius.circular(30.0),
                     ),
                     color: Colors.teal,
-                    onPressed: () {},
+                    onPressed: () async {
+                      Map<String, dynamic> user = {
+                        "email": _data.email,
+                        "username": _data.username,
+                        "first_name": _data.name,
+                        "last_name": _data.surname,
+                        "newsletter": _checked,
+                        "password": _data.password
+                      };
+                      print(user);
+
+                      var response =
+                          await UsersRepository().registerUsers(user);
+
+                      await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: Text(response['message']),
+                            );
+                          }).then((val) {
+                        if (response['success']) {
+                          gotoLogin();
+                        }
+                      });
+                    },
                     child: new Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: 15.0,
@@ -772,22 +798,24 @@ class _SignupData {
   String city = '';
   String province = '';
   String birthDate = '';
+  String username = '';
   String surname = '';
 
   _SignupData(
       {this.name,
-      this.surname,
+      this.username,
       this.email,
       this.address,
       this.password,
       this.city,
       this.province,
+      this.surname,
       this.birthDate});
 
   factory _SignupData.fromJson(Map<String, dynamic> json) {
     return _SignupData(
       name: json['name'],
-      surname: json['surname'],
+      username: json['username'],
       email: json['email'],
       address: json['address'],
       password: json['password'],

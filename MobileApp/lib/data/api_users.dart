@@ -34,10 +34,28 @@ class UsersRepository {
 
     if (response.statusCode == 200) {
       var res = json.decode(response.body);
-      print(res);
       String message = res['message'];
-      print(message);
       return message;
+    }
+  }
+
+  dynamic registerUsers(Map<String, dynamic> user) async {
+    var url = Config.apiUrl + '/users/register';
+    print('User');
+    print(user);
+    final response = await http.post(url,
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: json.encode(user));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print(response.body);
+      var x = json.decode(response.body);
+      print(x);
+      return x;
+    } else {
+      print(response.body);
     }
   }
 }
