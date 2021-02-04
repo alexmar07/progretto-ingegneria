@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Interfaces\NotificationInterface;
 
 /**
  * Controller per gli utenti
@@ -109,7 +108,7 @@ class Users extends Core_Controller {
         $this->notification_m->assign($notification_id);
 
         // Controllo se l'azione è di accettazione di richiesta
-        if ( $action == NotificationInterface::ACCEPT_REQUEST ) {
+        if ( $action == 'accept_request' ) {
             
             // Recupero i dati della notifica
             $notification = $this->notification_m->get();
