@@ -108,8 +108,8 @@ class Auth_users extends RestController {
             ->email('email','L\'email non è valida')
             ->alphanum('username', 'L\'username deve essere composto da caratteri e numeri')
             ->minlen('password',8, 'La password deve essere almeno di 8 caratteri')
-            ->callback([$this,'check_unique_email'], 'L\'email è gia stata utilizzata', $post)
-            ->callback([$this,'check_unique_username'], 'L\'username è gia stato utilizzato', $post);
+            ->callback([$this,'check_unique_email'], 'L\'email è gia stata utilizzata', $post['email'])
+            ->callback([$this,'check_unique_username'], 'L\'username è gia stato utilizzato', $post['username']);
 
         if ( ! $this->validation->is_valid() ) {
             $this->response(json(FALSE, $this->validation->get_error_message()),200);
@@ -128,4 +128,30 @@ class Auth_users extends RestController {
         $this->response(json(TRUE, 'La registrazione è stata effettuata con successo'),200);
 
     }
+
+    //------------------------------------------------------------------------------------------
+
+    /**
+     * Funzione che controlla se esiste una sola email
+     * 
+     * @param array $data Dati inviati
+     * @return bool
+     */
+    public function check_unique_email($email) {
+        return $this->user_m->unique('email', $email);
+    } 
+
+    //------------------------------------------------------------------------------------------
+    
+    /**
+     * Funzione che controlla se esiste un solo username
+     * 
+     * @param array $data Dati inviati
+     * @return bool
+     */
+    public function check_unique_username($username) {
+        return $this->user_m->unique('username', $username);
+    }
+
+    //------------------------------------------------------------------------------------------
 }
