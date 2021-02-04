@@ -196,9 +196,7 @@ class Users extends Core_Controller {
             'U.last_name',
             'U.username',
         ]);
-        $notifications = $this->notification_m
-            ->set_relation('users/user_model', 'U.id = N.user_send_id')
-            ->gets(['user_receive_id' => $this->jwt->id ]);
+        $notifications = $this->notification_m->get_notifications_by_user($this->jwt->id, $this->get('page'));
 
             // Controllo se le notifiche    
         if ( empty($notifications) ) {
