@@ -58,7 +58,7 @@ $route['login']   =   'auth/auth_users/login';
 
 // Gestione richieste di collegamente
 $route['users/request']         = 'users/users/create_link';
-$route['users/register']        = 'users/users/register';
+$route['users/register']        = 'auth/auth/register';
 $route['users/newsletter']      = 'users/users/send_newsletter';
 $route['users/list']            = 'users/users/list';
 
@@ -67,4 +67,4 @@ $route['list/add']                      = 'movies/movies_list/add';
 $route['list']                          = 'movies/movies_list/list';
 $route['list/remove/(:num)/(:any)']     = 'movies/movies_list/remove/$1/$2';
 $route['reviews/add']                   = 'movies/movies_reviews/add';
-$route['reviews/list']                   = 'movies/movies_reviews/list';
+$route['reviews/list']                  = 'movies/movies_reviews/list';

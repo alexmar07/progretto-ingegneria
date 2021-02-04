@@ -90,4 +90,42 @@ class Auth_users extends RestController {
             ], 200);
         }  
     }
+
+     //------------------------------------------------------------------------------------------
+
+    /**
+     * Funzione per la registrazione dell'utente
+     * 
+     * @return json
+     */
+    public function register_post () {
+
+        $post = $this->post();
+
+        $this->validation->set_data($post);
+
+        $this->validation->required(['first_name', 'last_name', 'email', 'password','username'], 'Tutti i campi sono obbligatori')
+            ->email('email','L\'email non è valida')
+            ->alphanum('username', 'L\'username deve essere composto da caratteri e numeri')
+            ->minlen('password',8, 'La password deve essere almeno di 8 caratteri')
+            ->callback([$this,'check_unique_email'], 'L\'email è gia stata utilizzata', $post)
+            ->callback([$this,'check_unique_username'], 'L\'username è gia stato utilizzato', $post);
+
+        if ( ! $this->validation->is_valid() ) {
+            $this->response(json(FALSE, $this->validation->get_error_message()),200);
+        }
+
+        $user_id = $this->ion_auth->register($post['username'], $post['password'], $post['email'], [
+            'first_name'    =>  $post['first_name'],
+            'last_name'     =>  $post['last_name'],
+            'newsletter'    =>  $post['newsletter']
+        ]);
+
+        if ( $user_id == false ) {
+            $this->response(json(FALSE, 'Errore durante la registrazione'),200);
+        }
+
+        $this->response(json(TRUE, 'La registrazione è stata effettuata con successo'),200);
+
+    }
 }
