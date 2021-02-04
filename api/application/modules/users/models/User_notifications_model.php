@@ -8,5 +8,6 @@ class User_notifications_model extends MY_Model {
 
     // Nome della tabella
     protected $_table = 'users_notifications';
+    protected $_table_alias = 'N';
 
 }

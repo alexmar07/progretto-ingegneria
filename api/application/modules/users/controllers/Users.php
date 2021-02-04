@@ -80,7 +80,7 @@ class Users extends Core_Controller {
             $search = $get['q'];
         }
         
-        $users = $this->main_m->get_users($get['page'], $search);
+        $users = $this->main_m->get_users($get['page'], $search, $this->jwt->id);
 
         $this->response(json(TRUE, 'Lista utenti', $users),200);        
     } 
@@ -191,11 +191,16 @@ class Users extends Core_Controller {
     public function notifications_get() {
 
         // Recupero le notifiche di un utente
-        $notifications = $this->notification_m->gets([
-            'user_receive_id' => $this->jwt->id
+        $this->db->select([
+            'U.first_name',
+            'U.last_name',
+            'U.username',
         ]);
+        $notifications = $this->notification_m
+            ->set_relation('users/user_model', 'U.id = N.user_send_id')
+            ->gets(['user_receive_id' => $this->jwt->id ]);
 
-        // Controllo se le notifiche
+            // Controllo se le notifiche    
         if ( empty($notifications) ) {
             $this->response(json(FALSE, 'Non ci sono notifiche'),200);
         }

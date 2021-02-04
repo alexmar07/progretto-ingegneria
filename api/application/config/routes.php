@@ -61,6 +61,7 @@ $route['users/request']         = 'users/users/create_link';
 $route['users/register']        = 'auth/auth_users/register';
 $route['users/newsletter']      = 'users/users/send_newsletter';
 $route['users/list']            = 'users/users/list';
+$route['users/notifications']   = 'users/users/notifications';
 
 
 $route['list/add']                      = 'movies/movies_list/add';

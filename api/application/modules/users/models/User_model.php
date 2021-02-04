@@ -11,7 +11,7 @@ class User_model extends MY_Model {
     protected   $_table_alias     = 'U';
     private     $for_page         = 20;
 
-    public function get_users($page = 1, $search = '') {
+    public function get_users($page = 1, $search = '', $user_id) {
 
         $this->db->select([
             'U.id',
@@ -33,7 +33,7 @@ class User_model extends MY_Model {
 
         $this->db->limit($this->for_page, $this->for_page * ($page > 0 ? $page - 1 : 0));
 
-        return $this->gets(['UG.name' => 'members']);
+        return $this->gets(['UG.name' => 'members', 'id != ' => $user_id ]);
 
     }
 }
