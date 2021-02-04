@@ -33,7 +33,7 @@ class User_model extends MY_Model {
 
         $this->db->limit($this->for_page, $this->for_page * ($page > 0 ? $page - 1 : 0));
 
-        return $this->gets(['UG.name' => 'members', 'id != ' => $user_id ]);
+        return $this->gets(['UG.name' => 'members', 'U.id != ' => $user_id ]);
 
     }
 }
