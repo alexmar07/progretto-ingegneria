@@ -187,7 +187,7 @@ class Users extends Core_Controller {
 
         $this->validation->set_data($post); 
 
-        $this->validation->required(['subject','body'], 'Il campo è obbligatorio');
+        $this->validation->required(['subject','body'], 'Il campi sono obbligatori');
 
         if ( ! $this->validation->is_valid() ) {
             $this->response(json(FALSE, $this->validation->get_error_message()),200);

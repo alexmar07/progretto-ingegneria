@@ -11,7 +11,7 @@ class User_model extends MY_Model {
     protected   $_table_alias     = 'U';
     private     $for_page         = 20;
 
-    public function get_users($page = 1, $search = '', $user_id) {
+    public function get_users($params, $user_id) {
 
         $this->db->select([
             'U.id',
@@ -21,17 +21,21 @@ class User_model extends MY_Model {
             'U.email'
         ]);
 
-        if ( ! empty($search )) {
+        if ( ! empty($params['q'])) {
 
             $this->db->where([
-                'MATCH(first_name,last_name,email) AGAINST ("'.$search.'")' => NULL
+                'MATCH(first_name,last_name,email) AGAINST ("'.$params['q'].'")' => NULL
             ]);
         }
         
+        if ( isset($params['newsletter']) ) {
+            $this->db->where('U.newsletter', $params['newsletter']);
+        }
+
         $this->set_relation('users/user_to_group_model', 'U.id = UTG.user_id', 'UTG')
             ->set_relation('users/user_group_model','UTG.group_id = UG.id', 'UG');
 
-        $this->db->limit($this->for_page, $this->for_page * ($page > 0 ? $page - 1 : 0));
+        $this->db->limit($this->for_page, $this->for_page * ($params['page'] > 0 ? $params['page'] - 1 : 0));
 
         return $this->gets(['UG.name' => 'members', 'U.id != ' => $user_id ]);
 
