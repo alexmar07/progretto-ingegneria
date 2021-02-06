@@ -39,7 +39,9 @@ class Users extends Core_Controller {
             $search = $get['q'];
         }
         
-        $users = $this->main_m->get_users($get, $this->jwt->id);
+        $request_link_by_user = $this->notification_m->get_by_user_id($this->jwt->id);
+        
+        $users = $this->main_m->get_users($get, $this->jwt->id, ! empty($request_link_by_user) ? array_column($request_link_by_user, 'user_receive_id') : []);
 
         $this->response(json(TRUE, 'Lista utenti', $users),200);        
     } 
