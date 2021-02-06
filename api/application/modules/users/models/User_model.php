@@ -33,7 +33,7 @@ class User_model extends MY_Model {
         }
 
         if ( ! empty($request_send) ) {
-            $this->db->where_not_in('id', $request_send);
+            $this->db->where_not_in('U.id', $request_send);
         }
 
         $this->set_relation('users/user_to_group_model', 'U.id = UTG.user_id', 'UTG')
