@@ -44,6 +44,11 @@ class Movies_list extends Core_Controller {
         // Recupero i dati in post
         $post = $this->post();
 
+        // Controllo se questo film è gia presente nella lista
+        if ( $this->main_m->exist($this->jwt->id, $post['movie_id'], $post['type'])) {
+            $this->response(json(FALSE,'Il film è gia aggiunto alla lista'), 200);
+        }
+
         // Inserisco il film alla lista
         $id = $this->main_m->insert([
             'user_id'   =>  $this->jwt->id,

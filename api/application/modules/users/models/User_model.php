@@ -11,7 +11,7 @@ class User_model extends MY_Model {
     protected   $_table_alias     = 'U';
     private     $for_page         = 20;
 
-    public function get_users($params, $user_id) {
+    public function get_users($params, $user_id, $request_send ) {
 
         $this->db->select([
             'U.id',
@@ -30,6 +30,10 @@ class User_model extends MY_Model {
         
         if ( isset($params['newsletter']) ) {
             $this->db->where('U.newsletter', $params['newsletter']);
+        }
+
+        if ( ! empty($request_send) ) {
+            $this->db->where_not_in('U.id', $request_send);
         }
 
         $this->set_relation('users/user_to_group_model', 'U.id = UTG.user_id', 'UTG')

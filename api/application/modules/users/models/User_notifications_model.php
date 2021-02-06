@@ -25,4 +25,14 @@ class User_notifications_model extends MY_Model {
         
         return $this->gets(['user_receive_id' => $user_id ]);
     }
+
+    public function get_by_user_id($user_id) {
+
+        $this->db->select([
+            'user_receive_id'
+        ]);
+
+        return $this->gets(['user_send_id' => $user_id]);
+    }
+
 }
