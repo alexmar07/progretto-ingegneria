@@ -107,7 +107,7 @@ class _UsersListViewState extends State<UsersListView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              width: 50.0,
+              width: 34,
               height: 200.0,
               // decoration: BoxDecoration(
               //     borderRadius: BorderRadius.all(Radius.circular(4)),
