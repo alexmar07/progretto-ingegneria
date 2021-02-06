@@ -21,9 +21,9 @@
                   <Font name="SansSerif Bold" size="12.0" />
                </font>
             </Button>
-            <TextField layoutX="211.0" layoutY="174.0" prefHeight="25.0" prefWidth="223.0" />
-            <PasswordField layoutX="209.0" layoutY="233.0" prefHeight="25.0" prefWidth="223.0" />
-            <Label layoutX="212.0" layoutY="149.0" text="EMAIL" textAlignment="CENTER" textFill="TEAL">
+            <TextField layoutX="211.0" layoutY="174.0" prefHeight="25.0" prefWidth="223.0" fx:id="txtUsername"/>
+            <PasswordField layoutX="209.0" layoutY="233.0" prefHeight="25.0" prefWidth="223.0" fx:id="txtPassword" />
+            <Label layoutX="212.0" layoutY="149.0" text="USERNAME" textAlignment="CENTER" textFill="TEAL">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
