@@ -39,7 +39,7 @@ class Users extends Core_Controller {
             $search = $get['q'];
         }
         
-        $users = $this->main_m->get_users($get['page'], $search, $this->jwt->id);
+        $users = $this->main_m->get_users($get, $this->jwt->id);
 
         $this->response(json(TRUE, 'Lista utenti', $users),200);        
     } 
@@ -205,7 +205,9 @@ class Users extends Core_Controller {
         if ( ! empty($users) ) {
             
             foreach($users as $u ) {
-                $this->email->to($u->email)->send();
+                if ( ! $this->email->to($u->email)->send(FALSE)) {
+                    $this->response(json(FALSE, 'Errore durante l\'invio delle newsletter'),200);
+                }
             }
         } 
 
