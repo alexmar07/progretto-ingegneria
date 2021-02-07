@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class MovieRepository {
-  Future<MovieList> getMovies(int currentPage) async {
+  Future<MovieList> getMovies(int currentPage, String query) async {
     var url = Config.apiTMDB +
         'discover/movie?api_key=' +
         Config.apiKeyTMDB +
@@ -17,8 +17,20 @@ class MovieRepository {
         '&page=' +
         currentPage.toString();
 
-    final response = await http.get(url);
+    if (query.isNotEmpty && query != '') {
+      url = Config.apiTMDB +
+          'search/movie?api_key=' +
+          Config.apiKeyTMDB +
+          '&language=' +
+          Config.language +
+          '&page=' +
+          currentPage.toString() +
+          '&query=' +
+          query;
+    }
 
+    print(url);
+    final response = await http.get(url);
     if (response.statusCode == 200) {
       return MovieList.fromJson(json.decode(response.body));
     } else {
@@ -72,11 +84,7 @@ class MovieRepository {
   dynamic removeMovieList(int movieId, String type) async {
     final prefs = await SharedPreferences.getInstance();
 
-    Map data = {'movie_id': movieId, 'type': type};
-
-    var body = json.encode(data);
-
-    var response = await http.delete(
+    await http.delete(
         Config.apiUrl + '/list/remove/' + movieId.toString() + '/' + type,
         headers: {
           'Authorization': prefs.getString('token'),

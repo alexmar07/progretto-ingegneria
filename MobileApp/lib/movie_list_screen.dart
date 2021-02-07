@@ -14,7 +14,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: MovieRepository().getMovies(1),
+        future: MovieRepository().getMovies(1, ''),
         builder: (BuildContext ctx, AsyncSnapshot snapshot) {
           if (snapshot.data == null) {
             return Center(child: CircularProgressIndicator());
@@ -52,7 +52,7 @@ class _MovieListViewState extends State<MovieListView> {
           _scrollController.position.maxScrollExtent -
                   _scrollController.offset <=
               50) {
-        MovieRepository().getMovies(currentPage + 1).then((val) {
+        MovieRepository().getMovies(currentPage + 1, '').then((val) {
           currentPage = val.page;
           setState(() {
             movie.addAll(val.movies);

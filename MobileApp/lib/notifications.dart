@@ -106,6 +106,7 @@ class _NotificationsListViewState extends State<NotificationsListView> {
 
   Widget itemCard(Notify notification, int index) {
     return Padding(
+      padding: null,
       child: Container(
         height: 163.0,
         width: double.infinity,

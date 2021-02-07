@@ -14,8 +14,10 @@ class MovieList {
       MovieList.fromJson(json.decode(str));
 
   factory MovieList.fromJson(Map<String, dynamic> json) => new MovieList(
-        movies:
-            new List<Movie>.from(json["results"].map((x) => Movie.fromJson(x))),
+        movies: json['results'] == null
+            ? new List<Movie>()
+            : new List<Movie>.from(
+                json["results"].map((x) => Movie.fromJson(x))),
         page: json["page"],
         totalResults: json["total_results"],
         totalPages: json["total_pages"],
