@@ -1,7 +1,6 @@
 import 'package:INGSW_MezMar/data/api_users.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:INGSW_MezMar/welcome_visitor.dart';
 import 'package:provider/provider.dart';
 import 'models/auth.dart';
 
@@ -155,27 +154,6 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                 ),
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 0.0),
-            child: new FlatButton(
-              child: new Text(
-                "Visita senza accedere",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 15.0,
-                    fontFamily: 'Quicksand'),
-                textAlign: TextAlign.end,
-              ),
-              onPressed: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => WelcomeVisitorScreen()),
-                ),
-              },
             ),
           ),
         ],
