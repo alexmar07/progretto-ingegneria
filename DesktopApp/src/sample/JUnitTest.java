@@ -2,10 +2,10 @@ package sample;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ServiceTest {
+class JUnitTest {
 
     @Test
-    void doLoginTestSuccess() {
+    void doLoginTestUsernamePasswordCorretti() {
         try {
             Service.doLogin("administrator","password");
         } catch (Exception e) {
