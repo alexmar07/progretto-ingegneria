@@ -60,14 +60,14 @@ class _HomeState extends State<Home> {
                     alignment: Alignment.topCenter,
                     child: TextFormField(
                       onTap: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        Navigator.push<dynamic>(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                              builder: (BuildContext context) =>
-                                  MovieListScreen(),
-                              fullscreenDialog: true),
-                        );
+                        //   FocusScope.of(context).requestFocus(FocusNode());
+                        //   Navigator.push<dynamic>(
+                        //     context,
+                        //     MaterialPageRoute<dynamic>(
+                        //         builder: (BuildContext context) =>
+                        //             MovieListScreen(),
+                        //         fullscreenDialog: true),
+                        //   );
                       },
                       cursorColor: Colors.grey,
                       decoration: InputDecoration(
@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
                             size: 20,
                             color: Colors.grey,
                           ),
-                          hintText: "Cerca un film  ",
+                          hintText: "Cerca un film",
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w300,
                               fontSize: 14.0,
@@ -93,15 +93,15 @@ class _HomeState extends State<Home> {
           ];
         },
         body: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
-              image: AssetImage('assets/images/cinema_home.jpg'),
-              fit: BoxFit.cover,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              image: DecorationImage(
+                colorFilter: new ColorFilter.mode(
+                    Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                image: AssetImage('assets/images/cinema_home.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        ));
+            child: MovieListScreen()));
   }
 }
